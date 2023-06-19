@@ -9,15 +9,11 @@ import { Customer } from '../../models/customer';
 })
 export class CustomersComponent {
 
-  customers: Customer[] = [];
-
-  constructor(private customerService: CustomerService){
+  constructor(){
 
   }
 
   ngOnInit(){
-    this.customerService.findAll().subscribe(data => {
-      this.customers = data;
-    })
+    
   }
 }

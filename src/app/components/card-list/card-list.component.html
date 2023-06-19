@@ -1,7 +1,8 @@
-
+<div *ngFor="let customer of customers">
     <div class="card" (click)="customerDetailsMethod()" style="width: 18rem;cursor: pointer">
-        <img class="card-img-top" src="{{cardImage}}">
+        <img class="card-img-top" src="{{customer.image}}">
         <div class="card-body">
-            <h3 class="card-title">{{cardTitle}}</h3>
+            <h3 class="card-title">{{customer.firstName}}</h3>
         </div>
     </div>
+</div>

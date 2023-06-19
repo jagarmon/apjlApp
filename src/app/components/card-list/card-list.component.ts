@@ -11,7 +11,7 @@ import { CustomerDetailsComponent } from '../customers/customer-details/customer
 })
 export class CardListComponent {
   //Ocultar lista de imagenes con eventos para que el modal se vea bien
- 
+  customers: Customer[] = [];
 
   @Input() cardTitle: string = "";
   @Input() cardImage: string = "";
@@ -33,8 +33,18 @@ export class CardListComponent {
 
   
   ngOnInit(){
-     if(this.cardImage===""){
-      this.cardImage="../assets/images/noImg.jpg"
-    } 
+    this.customerService.findAll().subscribe(data => {
+      this.customers = data;
+      this.checkImages();
+      
+    })
+    
+  }
+
+  checkImages(): void{
+    this.customers.forEach(customer => {
+      //TODO No se actualiza a tiempo
+      if(customer.image === null) customer.image = "../assets/images/noImg.jpg"
+    });
   }
 }

@@ -1,1 +1,3 @@
-<app-image-card></app-image-card>
+<div *ngFor="let customer of customers">
+    <app-card-list cardTitle="{{customer.lastName}}" cardImage="{{customer.image}}"></app-card-list>
+</div>

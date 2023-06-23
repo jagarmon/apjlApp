@@ -18,7 +18,11 @@ export class CustomerService {
     return this.http.get<Customer[]>(this.customersUrl+"/listar");
   }
 
-  public save(customer: Customer) {
+  public save(customer: Customer): Observable<Customer> {
     return this.http.post<Customer>(this.customersUrl+"/nuevo", customer);
+  }
+
+  public update(customer: Customer): Observable<Customer>{
+    return this.http.put<Customer>(this.customersUrl+"/actualizar/"+customer.id,customer);
   }
 }

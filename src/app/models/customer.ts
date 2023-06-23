@@ -4,5 +4,5 @@ export interface Customer {
     firstName: string;
     address: string;
     city: string;
-    image: string;
+    image?: string;
 }

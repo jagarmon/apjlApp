@@ -1,8 +1,20 @@
-<div *ngFor="let customer of customers">
-    <div class="card" (click)="customerDetailsMethod()" style="width: 18rem;cursor: pointer">
-        <img class="card-img-top" src="{{customer.image}}">
+<button id="settings" (click)="settingsClick()"><fa-icon [icon]="settingsIcon"></fa-icon></button>
+
+<div id="container" *ngFor="let data of dataArray">
+    <div class="card" (click)="DetailsModalMethod(
+        data.idCard,
+        data.field1name,
+        data.field2name,
+        data.field3name, 
+        data.field4name, 
+        data.field1value, 
+        data.field2value, 
+        data.field3value,
+        data.field4value,
+        data.image)" >
+        <img class="card-img-top" src="{{data.image}}">
         <div class="card-body">
-            <h3 class="card-title">{{customer.firstName}}</h3>
+            <h3 class="card-title">{{data.field1value}} {{data.field2value}}</h3>
         </div>
     </div>
 </div>

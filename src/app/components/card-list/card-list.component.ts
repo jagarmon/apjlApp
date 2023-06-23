@@ -1,8 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { CustomerService } from '../../services/customer.service';
-import { Customer } from '../../models/customer';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { CustomerDetailsComponent } from '../customers/customer-details/customer-details.component';
+import { DetailsModalComponent } from './details-modal/details-modal.component';
+import { faGear } from '@fortawesome/free-solid-svg-icons';
+import { Card } from '../../models/card';
+
 
 @Component({
   selector: 'app-card-list',
@@ -11,40 +13,56 @@ import { CustomerDetailsComponent } from '../customers/customer-details/customer
 })
 export class CardListComponent {
   //Ocultar lista de imagenes con eventos para que el modal se vea bien
-  customers: Customer[] = [];
 
-  @Input() cardTitle: string = "";
-  @Input() cardImage: string = "";
+  @Input() dataArray: Card[] = [];
+  settingsIcon=faGear;
+
+  settingsPressed: boolean = false;
+
+  modalCalled: boolean = false;
+
+  result: any;
 
   constructor(private matDialog: MatDialog, private customerService: CustomerService){
   }
-  
-   customerDetailsMethod(): void {
-    const dialogConfig = new MatDialogConfig();
     
-    dialogConfig.disableClose = true;
-    dialogConfig.id = "customer-details";
-    dialogConfig.height = "600px";
-    dialogConfig.width = "600px";
-    dialogConfig.position = {top: '0px', right:'0px'} 
+   DetailsModalMethod(idCard: number, field1name: string, field2name: string, field3name:string, field4name:string, field1value: string, field2value: string, field3value:string, field4value:string, image?: string): void {
+    
+    this.modalCalled = !this.modalCalled;
+    
+    const modalDialog = this.matDialog.open(DetailsModalComponent, {
+      closeOnNavigation: false,
+      disableClose: false,
+      id: "details-modal",
+      height: "600px",
+      width: "600px",
+      data: {
+        idCard: idCard,
+        field1name: field1name,
+        field2name: field2name,
+        field3name: field3name,
+        field4name: field4name,
+        field1value: field1value,
+        field2value: field2value,
+        field3value: field3value,
+        field4value: field4value,
+        image: image,
+        settingsPressed: this.settingsPressed
+      }
+    });
 
-    const modalDialog = this.matDialog.open(CustomerDetailsComponent, dialogConfig);
+    modalDialog.afterClosed().subscribe();
+    
     }
 
   
   ngOnInit(){
-    this.customerService.findAll().subscribe(data => {
-      this.customers = data;
-      this.checkImages();
-      
-    })
+    
     
   }
-
-  checkImages(): void{
-    this.customers.forEach(customer => {
-      //TODO No se actualiza a tiempo
-      if(customer.image === null) customer.image = "../assets/images/noImg.jpg"
-    });
+  
+  settingsClick():void {
+    this.settingsPressed = !this.settingsPressed
   }
+
 }

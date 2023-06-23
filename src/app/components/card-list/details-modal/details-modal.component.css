@@ -1,0 +1,27 @@
+#group-of-groups{
+    padding-left: 3%;
+    padding-right: 3%;
+    padding-top: 5%;
+}
+#field-form{    
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+.card-img{
+    width: 287px;
+    height: 310px;
+}
+#image-container{
+    margin-top: 5%;
+    text-align: center;
+}
+.button-container{
+    margin-top: 5%;
+    text-align: center;
+}
+input + label{
+    margin-top: 3%;
+}
+label{
+    margin-bottom: 1%;
+}

@@ -9,4 +9,5 @@ export interface Card {
     field3value: string;
     field4value: string;
     image?: string;
+    type: string;
 }

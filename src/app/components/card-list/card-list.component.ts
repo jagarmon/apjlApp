@@ -26,7 +26,7 @@ export class CardListComponent {
   constructor(private matDialog: MatDialog, private customerService: CustomerService){
   }
     
-   DetailsModalMethod(idCard: number, field1name: string, field2name: string, field3name:string, field4name:string, field1value: string, field2value: string, field3value:string, field4value:string, image?: string): void {
+   DetailsModalMethod(idCard: number, field1name: string, field2name: string, field3name:string, field4name:string, field1value: string, field2value: string, field3value:string, field4value:string, type: string, image?: string): void {
     
     this.modalCalled = !this.modalCalled;
     
@@ -46,6 +46,7 @@ export class CardListComponent {
         field2value: field2value,
         field3value: field3value,
         field4value: field4value,
+        type: type,
         image: image,
         settingsPressed: this.settingsPressed
       }

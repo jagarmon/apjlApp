@@ -16,7 +16,14 @@
     border-radius: 3%;
 }
 #settings{
-    position: absolute;
+    position: fixed;
     right: 10px;
     top: 5px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+    background-color: green;
+    border-color: green;
+    border-radius: 50%;
 }

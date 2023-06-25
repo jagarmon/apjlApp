@@ -1,6 +1,6 @@
 import { Prueba } from './prueba';
 import { ImageService } from './../../../services/image.service';
-import { Component, Inject, Input } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Card } from '../../../models/card';
@@ -26,7 +26,8 @@ export class DetailsModalComponent {
     field2value:"",
     field3value: "",
     field4value: "",
-    image: ""
+    image: "",
+    type: ""
   }
   settingsPressed: boolean = false;
   inputFile!: File;
@@ -48,20 +49,43 @@ export class DetailsModalComponent {
       this.card.field3value = data.field3value;
       this.card.field4value = data.field4value;
       this.card.image = data.image;
+      this.card.type = data.type;
     }
-  ngOnInit(){
-  }
   
   onChangeInput(event: any){
-
-    console.log(this.card)
     this.inputFile = event.target.files[0];
 
   }
 
  
- save(): void{
+ save(): void{  
+  
+  this.updateElement()
 
+  this.dialogRef.close();
+  
+  setTimeout(()=>{window.location.reload()},2000);
+
+ }
+
+
+ updateElement(): void{
+
+  if(this.card.type == "updateCustomer"){
+
+    let customer = this.createCustomerObject();
+    setTimeout(()=>{this.customerService.update(customer).subscribe()},2000);
+
+  } 
+  else if(this.card.type == "createCustomer"){
+
+    let customer = this.createCustomerObject();
+    setTimeout(()=>{this.customerService.save(customer).subscribe()},2000);
+  }
+  else if(this.card.type == "provider") console.log("DO SOMETHING")
+ }
+
+ createCustomerObject(): Customer{
   let customer: Customer = {
     id: this.card.idCard,
     firstName: this.card.field1value,
@@ -70,32 +94,18 @@ export class DetailsModalComponent {
     city: this.card.field4value,
     image: this.card.image
   }
-
   if (this.inputFile) {    
 
-     this.imageService.upload(this.inputFile).subscribe(
-      
-      (data: any)=>{
-        if(data.body){
-          customer.image = "../assets/images/"+data.body.fileName+".jpg";
-        } 
-      }
-    
-    )
-  
-  }
-  
-  setTimeout(()=>{this.updateCustomer(customer)},2000);
-
-  this.dialogRef.close();
-  
-  setTimeout(()=>{window.location.reload()},2000);
+    this.imageService.upload(this.inputFile).subscribe(       
+     (data: any)=>{
+       if(data.body){
+         customer.image = "../assets/images/"+data.body.fileName+".jpg";
+       } 
+     }   
+   ) 
  }
- updateCustomer(customer: Customer): void{
-  this.customerService.update(customer).subscribe();
+ return customer;
  }
-
-
  
  close(): void{
   

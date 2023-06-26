@@ -1,12 +1,8 @@
-import { Prueba } from './prueba';
 import { ImageService } from './../../../services/image.service';
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { FormsModule, NgForm } from '@angular/forms';
 import { Card } from '../../../models/card';
 import { CustomerService } from '../../../services/customer.service';
-import {HttpHeaders} from '@angular/common/http';
-import { param } from 'jquery';
 import { Customer } from '../../../models/customer';
 
 @Component({
@@ -107,8 +103,4 @@ export class DetailsModalComponent {
  return customer;
  }
  
- close(): void{
-  
- }
-
 }

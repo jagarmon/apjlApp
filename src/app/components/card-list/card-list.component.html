@@ -1,21 +1,14 @@
-<button id="settings" (click)="settingsClick()"><fa-icon [icon]="settingsIcon"></fa-icon></button>
+<button class="settings-button" (click)="settingsClick()"><fa-icon [icon]="settingsIcon"></fa-icon></button>
 
 <div id="container" *ngFor="let data of dataArray">
-    <div class="card" (click)="DetailsModalMethod(
-        data.idCard,
-        data.field1name,
-        data.field2name,
-        data.field3name, 
-        data.field4name, 
-        data.field1value, 
-        data.field2value, 
-        data.field3value,
-        data.field4value,
-        data.type,
-        data.image)" >
-        <img class="card-img-top" src="{{data.image}}">
-        <div class="card-body">
+    
+    <div class="card">
+        <button class="delete-button" (click)="deleteClick(data)" *ngIf="settingsPressed"><fa-icon [icon]="cancelIcon"></fa-icon></button>
+        <img (click)="DetailsModalMethod(data)" class="card-img-top" src="{{data.image}}">
+        <div class="card-body" (click)="DetailsModalMethod(data)">
             <h3 class="card-title">{{data.field1value}} {{data.field2value}}</h3>
         </div>
     </div>
 </div>
+
+<button id="newCustomerButton" (click)="crearClienteClick()"><fa-icon [icon]="newCustomerIcon"></fa-icon></button>

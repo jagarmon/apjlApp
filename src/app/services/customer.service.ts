@@ -25,4 +25,8 @@ export class CustomerService {
   public update(customer: Customer): Observable<Customer>{
     return this.http.put<Customer>(this.customersUrl+"/actualizar/"+customer.id,customer);
   }
+
+  public delete(id: number){
+    return this.http.delete<Customer>(this.customersUrl+"/eliminar/"+id);
+  }
 }

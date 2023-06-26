@@ -3,6 +3,7 @@ import { CustomerService } from '../../services/customer.service';
 import { Component } from '@angular/core';
 import { Customer } from '../../models/customer';
 import { MatDialog } from '@angular/material/dialog';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-customers',
@@ -13,6 +14,8 @@ export class CustomersComponent {
 
   customers: Customer[] = [];
   cardList: Card[] = [];
+
+  backIcon=faArrowLeft;
 
   constructor(private matDialog: MatDialog, private customerService: CustomerService){
 
@@ -45,6 +48,10 @@ export class CustomersComponent {
         type: "updateCustomer"
       });
     });
+  }
+
+  goBackClick(){
+    
   }
 
 }

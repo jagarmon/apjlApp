@@ -1,7 +1,14 @@
-<button class="settings-button" (click)="settingsClick()"><fa-icon [icon]="settingsIcon"></fa-icon></button>
 
-<div id="container" *ngFor="let data of dataArray">
-    
+<app-floating-button 
+    buttonBorderColor="green" 
+    buttonBackGroundColor="green" 
+    buttonRight="10px" 
+    buttonTop="10px" 
+    [buttonIcon]="settingsIcon"
+    (click)="settingsClick()">
+</app-floating-button>
+
+<div id="container" *ngFor="let data of dataArray">    
     <div class="card">
         <button class="delete-button" (click)="deleteClick(data)" *ngIf="settingsPressed"><fa-icon [icon]="cancelIcon"></fa-icon></button>
         <img (click)="DetailsModalMethod(data)" class="card-img-top" src="{{data.image}}">
@@ -11,4 +18,13 @@
     </div>
 </div>
 
-<button id="newCustomerButton" (click)="crearClienteClick()"><fa-icon [icon]="newCustomerIcon"></fa-icon></button>
+<app-floating-button 
+    buttonBorderColor="green" 
+    buttonBackGroundColor="green" 
+    buttonBottom="10px"
+    buttonRight="10px"
+    buttonWidth="50px" 
+    buttonHeight="50px" 
+    [buttonIcon]="newCustomerIcon"
+    (click)="crearClienteClick()">
+</app-floating-button>

@@ -1,0 +1,26 @@
+.button-class{
+    height:150px;
+    width:150px;
+    margin-right:1%;
+    margin-bottom: 1%;
+    border-radius: 10%;
+    color:white;
+    display: inline-block
+}
+
+.purple{
+    background-color: purple;
+}
+
+.blue{
+    background-color: blue;
+}
+
+.green{
+    background-color: green;
+}
+
+.button-container{
+    padding: 125px;
+    text-align: center;
+}

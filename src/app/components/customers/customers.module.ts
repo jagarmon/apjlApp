@@ -7,7 +7,7 @@ import { CardListComponent } from '../card-list/card-list.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
 import { DetailsModalComponent } from '../card-list/details-modal/details-modal.component';
-import { FloatingButtonComponent } from '../../floating-button/floating-button.component';
+import { FloatingButtonComponent } from '../floating-button/floating-button.component';
 
 
 @NgModule({

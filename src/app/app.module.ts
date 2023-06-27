@@ -1,31 +1,29 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { DetailsModalComponent } from './components/card-list/details-modal/details-modal.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { HttpClientModule } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {FormsModule} from '@angular/forms';
 
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { DeleteConfirmationModalComponent } from './shared/card-list/delete-confirmation-modal/delete-confirmation-modal.component';
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DeleteConfirmationModalComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
     BrowserAnimationsModule,
-    MatDialogModule,
-    HttpClientModule,
-    FontAwesomeModule,
-    FormsModule
+    HttpClientModule
   ],
   providers: [],
-  bootstrap: [AppComponent],
-  entryComponents: [DetailsModalComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

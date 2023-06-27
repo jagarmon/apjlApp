@@ -10,7 +10,18 @@
 
 <div id="container" *ngFor="let data of dataArray">    
     <div class="card">
-        <button class="delete-button" (click)="deleteClick(data)" *ngIf="settingsPressed"><fa-icon [icon]="cancelIcon"></fa-icon></button>
+        
+        <app-floating-button 
+            buttonBorderColor="red" 
+            buttonBackGroundColor="red" 
+            buttonTop="0"
+            buttonRight="0"
+            [buttonIcon]="cancelIcon"
+            *ngIf="settingsPressed"
+            (click)="deleteClick(data)"
+            buttonPosition="absolute">
+        </app-floating-button>
+    
         <img (click)="DetailsModalMethod(data)" class="card-img-top" src="{{data.image}}">
         <div class="card-body" (click)="DetailsModalMethod(data)">
             <h3 class="card-title">{{data.field1value}} {{data.field2value}}</h3>
@@ -26,5 +37,5 @@
     buttonWidth="50px" 
     buttonHeight="50px" 
     [buttonIcon]="newCustomerIcon"
-    (click)="crearClienteClick()">
+    (click)="createCustomerClick()">
 </app-floating-button>

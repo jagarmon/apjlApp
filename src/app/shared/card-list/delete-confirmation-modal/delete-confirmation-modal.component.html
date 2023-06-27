@@ -1,0 +1,23 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-title">Eliminación de perfil</h4>
+    <button
+        type="button"
+        class="btn-close"
+        aria-label="Close button"
+        aria-describedby="modal-title"
+        (click)="cancelClick()"
+    ></button>
+</div>
+<div class="modal-body">
+    <p>
+        <strong>¿Seguro que quieres eliminar <span class="text-primary"></span> {{deletedElement}} ?</strong>
+    </p>
+    <p>
+        Toda la información asociada será permanentemente eliminada.
+        <span class="text-danger">Esta operación no se puede deshacer.</span>
+    </p>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="cancelClick()">Cancelar</button>
+    <button type="button" ngbAutofocus class="btn btn-danger" (click)="continueClick()">Continuar</button>
+</div>

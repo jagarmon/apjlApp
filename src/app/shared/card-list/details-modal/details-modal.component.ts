@@ -1,9 +1,10 @@
-import { ImageService } from './../../../services/image.service';
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Card } from '../../../models/card';
+
+import { ImageService } from '../../../services/image.service';
+import { Card } from '../models/card';
 import { CustomerService } from '../../../services/customer.service';
-import { Customer } from '../../../models/customer';
+import { Customer } from '../../../customers/models/customer';
 
 @Component({
   selector: 'app-details-modal',

@@ -20,6 +20,10 @@
     background-color: green;
 }
 
+.pink{
+    background-color: rgb(167, 203, 46);
+}
+
 .button-container{
     padding: 125px;
     text-align: center;

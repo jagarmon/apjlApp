@@ -16,4 +16,5 @@ export class FloatingButtonComponent {
   @Input() buttonBottom: string = "auto";
   @Input() buttonWidth: string = "auto";
   @Input() buttonHeight: string = "auto";
+  @Input() buttonPosition: string = "fixed";
 }

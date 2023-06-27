@@ -1,9 +1,10 @@
-import { Card } from '../../models/card';
-import { CustomerService } from '../../services/customer.service';
 import { Component } from '@angular/core';
-import { Customer } from '../../models/customer';
 import { MatDialog } from '@angular/material/dialog';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+
+import { Customer } from './models/customer';
+import { Card } from '../shared/card-list/models/card';
+import { CustomerService } from '../services/customer.service';
 
 @Component({
   selector: 'app-customers',

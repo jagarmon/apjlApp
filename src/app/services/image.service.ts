@@ -1,5 +1,5 @@
-import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,6 @@ export class ImageService {
   
   private imageUrl: string;
 
-  
   constructor(private http: HttpClient) {
     this.imageUrl = 'http://localhost:8080/file';
 

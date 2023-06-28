@@ -9,12 +9,13 @@ import {FormsModule} from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DeleteConfirmationModalComponent } from './shared/card-list/delete-confirmation-modal/delete-confirmation-modal.component';
+import { WorkDataComponent } from './work-data/work-data.component';
+import { WorksModule } from './works/works.module';
+import { WorksComponent } from './works/works.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    DeleteConfirmationModalComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,

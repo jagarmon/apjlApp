@@ -22,8 +22,8 @@
             buttonPosition="absolute">
         </app-floating-button>
     
-        <img (click)="DetailsModalMethod(data)" class="card-img-top" src="{{data.image}}">
-        <div class="card-body" (click)="DetailsModalMethod(data)">
+        <img (click)="editCustomerClick(data)" class="card-img-top" src="{{data.image}}">
+        <div class="card-body" (click)="editCustomerClick(data)">
             <h3 class="card-title">{{data.field1value}} {{data.field2value}}</h3>
         </div>
     </div>

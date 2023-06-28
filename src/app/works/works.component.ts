@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
 import { DetailsModalComponent } from '../shared/card-list/details-modal/details-modal.component';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { Work } from './models/work';
+import { WorkService } from '../services/work.service';
 
 @Component({
   selector: 'app-works',
@@ -9,23 +12,21 @@ import { DetailsModalComponent } from '../shared/card-list/details-modal/details
   styleUrls: ['./works.component.css']
 })
 export class WorksComponent {
+  backIcon=faArrowLeft;
 
-  constructor(private matDialog: MatDialog){
-    
+  works: Work[] = [];
+
+
+  constructor(private workService: WorkService){
   }
-  method(){
-    //Pantalla con datos y con generar factura
-    const modalDialog = this.matDialog.open(DetailsModalComponent, {
-      closeOnNavigation: false,
-      disableClose: false,
-      id: "details-modal",
-      height: "600px",
-      width: "600px",
-      data: {
-        
-      }
-    });
 
-    modalDialog.afterClosed().subscribe();
+
+  
+  ngOnInit(){
+
+    this.workService.findAll().subscribe(data => {
+      this.works = data;      
+    })
+
   }
 }

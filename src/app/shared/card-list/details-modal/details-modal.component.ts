@@ -12,20 +12,8 @@ import { Customer } from '../../../customers/models/customer';
   styleUrls: ['./details-modal.component.css']
 })
 export class DetailsModalComponent {
-
-  card: Card = {
-    idCard: -1,
-    field1name: "",
-    field2name: "",
-    field3name: "",
-    field4name: "",
-    field1value: "",
-    field2value:"",
-    field3value: "",
-    field4value: "",
-    image: "",
-    type: ""
-  }
+  
+  card = {} as Card
   settingsPressed: boolean = false;
   inputFile!: File;
 

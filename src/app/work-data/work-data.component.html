@@ -1,0 +1,42 @@
+<form>
+    <div class="form-group">
+      <label for="nameInput">Nombre del trabajo</label>
+      <input class="form-control" id="nameInput" value="{{work.name}}" placeholder="Nombre del trabajo">      
+    </div>
+
+    <div class="form-group">
+      <label for="descriptionInput">Descripción</label>
+      <input class="form-control" id="descriptionInput" value="{{work.description}}" placeholder="Descripción del trabajo">
+    </div>
+
+    <div class="form-group">
+        <label for="addressInput">Dirección</label>
+        <input class="form-control" id="addressInput" value="{{work.address}}" placeholder="Dirección">
+    </div>
+
+    <div class="form-group">
+        <label for="cityInput">Ciudad</label>
+        <input class="form-control" id="cityInput" value="{{work.city}}" placeholder="Ciudad">
+    </div>
+
+    <div class="form-group">
+        <label for="priceInput">Precio</label>
+        <input class="form-control" id="priceInput" value="{{work.price}}" placeholder="Precio">
+    </div>
+
+    <div class="form-group">
+        <label for="selectCustomer">Cliente</label>
+        <select class="form-control" id="selectCustomer">   
+            <option></option>     
+            <option [selected]="work.customer.id === customer?.id" *ngFor="let customer of customers">{{customer.firstName}}  {{customer.lastName}}</option>
+            
+        </select>
+      </div>
+
+    <div class="form-check">
+      <input type="checkbox" [checked]="work.paid" class="form-check-input" id="paidCheckBox">
+      <label class="form-check-label" for="paidCheckBox">Pagado</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+
+  </form>

@@ -29,7 +29,7 @@ export class CardListComponent {
   constructor(private matDialog: MatDialog, private customerService: CustomerService, private _modalService: NgbModal){
   }
     
-   DetailsModalMethod(data: any): void {
+  editCustomerClick(data: any): void {
         
     const modalDialog = this.matDialog.open(DetailsModalComponent, {
       closeOnNavigation: false,
@@ -63,10 +63,6 @@ export class CardListComponent {
 
         let modal = this.showConfirmationModal(data);
 
-        console.log(modal.result)
-        setTimeout(()=>{
-
-        })
         modal.result.then((result: any) => {
           if ( result === 'success' ) {
             this.deleteCustomer(data); 

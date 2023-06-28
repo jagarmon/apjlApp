@@ -1,1 +1,11 @@
-<button (click)="method()">Pulsar</button>
+<app-floating-button 
+    buttonBorderColor="purple" 
+    buttonBackGroundColor="purple" 
+    buttonLeft="10px" 
+    buttonTop="10px" 
+    routerLink="/home"
+    [buttonIcon]="backIcon"
+    >
+</app-floating-button>
+
+<app-works-table [works]="works"></app-works-table>

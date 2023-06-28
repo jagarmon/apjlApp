@@ -1,0 +1,52 @@
+<div class="container-div">
+    <form class="filter">
+        <div class="mb-3 row">
+            <label for="table-filtering-search" class="col-xs-3 col-sm-auto col-form-label">Texto a filtrar</label>
+            <div class="col-xs-3 col-sm-auto">
+                <input name="filterName" id="table-filtering-search" class="form-control" type="text" [(ngModel)]="filter" />
+            </div>
+                <label for="table-filtering-type" class="col-xs-3 col-sm-auto col-form-label">Filtrar por:</label>
+                <div class="col-xs-3 col-sm-auto">
+                    <select name="filterTypeName" class="form-control" id="table-filtering-type" [(ngModel)]="filterType">   
+                        <option value="0" selected>Trabajo</option>   
+                        <option value="1">Cliente</option>  
+                        <option value="2">Ciudad</option> +
+                        <option value="3">Pagado</option>                        
+                    </select>
+                </div>
+        </div>
+        
+    </form>
+
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Trabajo</th>
+            <th scope="col">Ciudad</th>
+            <th scope="col">Cliente</th>
+            <th scope="col">Pagado</th>
+        </tr>
+        </thead>
+        <tbody>            
+            <tr (click)="workClick(work.id)" *ngFor="let work of works | filter : filter : filterType"> <!--| filterPipe : searchWord-->
+                <th scope="row">{{work.id}}</th>
+                <td>{{work.name}}</td>
+                <td>{{work.city}}</td>
+                <td>{{work.customer.firstName}}</td>
+                <td><input type="checkbox" name="checkBoxPaid" [checked]="work.paid"/></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <app-floating-button 
+        buttonBorderColor="green" 
+        buttonBackGroundColor="green" 
+        buttonBottom="10px"
+        buttonRight="10px"
+        buttonWidth="50px" 
+        buttonHeight="50px" 
+        [buttonIcon]="newCustomerIcon"
+        (click)="createJobClick()">
+    </app-floating-button>
+</div>

@@ -7,14 +7,14 @@ import { SharedModule } from '../shared/shared.module';
 import { WorksTableComponent } from '../works-table/works-table.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FilterPipe } from '../works-table/filter.pipe';
-import { WorkDataComponent } from '../work-data/work-data.component';
+import { WorkModalComponent } from '../work-modal/work-modal.component';
 
 
 @NgModule({
   declarations: [
     WorksComponent,
     WorksTableComponent,
-    WorkDataComponent,
+    WorkModalComponent,
     FilterPipe
   ],
   imports: [

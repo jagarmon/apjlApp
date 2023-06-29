@@ -29,7 +29,7 @@ export class CardListComponent {
   constructor(private matDialog: MatDialog, private customerService: CustomerService, private _modalService: NgbModal){
   }
     
-  editCustomerClick(data: any): void {
+  editClick(data: any): void {
         
     const modalDialog = this.matDialog.open(DetailsModalComponent, {
       closeOnNavigation: false,
@@ -84,7 +84,7 @@ export class CardListComponent {
       modal.componentInstance.deletedElement = data.field1value + " " + data.field2value;
       return modal;
     }
-    createCustomerClick(){
+    createClick(){
             
       const modalDialog = this.matDialog.open(DetailsModalComponent, {
         closeOnNavigation: false,

@@ -22,8 +22,8 @@
             buttonPosition="absolute">
         </app-floating-button>
     
-        <img (click)="editCustomerClick(data)" class="card-img-top" src="{{data.image}}">
-        <div class="card-body" (click)="editCustomerClick(data)">
+        <img (click)="editClick(data)" class="card-img-top" src="{{data.image}}">
+        <div class="card-body" (click)="editClick(data)">
             <h3 class="card-title">{{data.field1value}} {{data.field2value}}</h3>
         </div>
     </div>
@@ -37,5 +37,5 @@
     buttonWidth="50px" 
     buttonHeight="50px" 
     [buttonIcon]="newCustomerIcon"
-    (click)="createCustomerClick()">
+    (click)="createClick()">
 </app-floating-button>

@@ -43,7 +43,7 @@ export class DetailsModalComponent {
   }
 
  
- save(): void{  
+ saveClick(): void{  
   
   this.updateElement()
 

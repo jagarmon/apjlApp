@@ -24,7 +24,7 @@
             <input type="file" class="form-control-file" accept=".jpg" id="input-upload-file" (change)="onChangeInput($event)">
         </div>
         <div class="button-container">
-            <button (click)="save()" type="submit" [hidden]="!data.settingsPressed" class="btn btn-primary">Confirmar</button>
+            <button (click)="saveClick()" type="submit" [hidden]="!data.settingsPressed" class="btn btn-primary">Confirmar</button>
         </div>
     </div>
   </form>

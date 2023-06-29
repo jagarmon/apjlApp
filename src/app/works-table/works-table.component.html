@@ -17,6 +17,15 @@
         </div>
         
     </form>
+    
+    <app-floating-button 
+      buttonBorderColor="green" 
+      buttonBackGroundColor="green" 
+      buttonRight="10px" 
+      buttonTop="10px" 
+      [buttonIcon]="settingsIcon"
+      (click)="settingsClick()">
+    </app-floating-button>
 
     <table class="table table-hover">
         <thead>
@@ -29,12 +38,23 @@
         </tr>
         </thead>
         <tbody>            
-            <tr (click)="workClick(work.id)" *ngFor="let work of works | filter : filter : filterType"> <!--| filterPipe : searchWord-->
-                <th scope="row">{{work.id}}</th>
-                <td>{{work.name}}</td>
-                <td>{{work.city}}</td>
-                <td>{{work.customer.firstName}}</td>
-                <td><input type="checkbox" name="checkBoxPaid" [checked]="work.paid"/></td>
+            <tr *ngFor="let work of works | filter : filter : filterType">
+                <th (click)="editWorkClick(work)" scope="row">{{work.id}}</th>
+                <td (click)="editWorkClick(work)">{{work.name}}</td>
+                <td (click)="editWorkClick(work)">{{work.city}}</td>
+                <td (click)="editWorkClick(work)">{{work.customer.firstName}}</td>
+                <td (click)="editWorkClick(work)"><input type="checkbox" name="checkBoxPaid" [checked]="work.paid"/></td>
+                <td>
+                    <app-floating-button 
+                    buttonBorderColor="red" 
+                    buttonBackGroundColor="red" 
+                    buttonRight="15px"
+                    [buttonIcon]="cancelIcon"
+                    *ngIf="settingsPressed"
+                    (click)="deleteWorkClick(work)"
+                    buttonPosition="absolute">
+                    </app-floating-button> 
+                </td>
             </tr>
         </tbody>
     </table>
@@ -47,6 +67,6 @@
         buttonWidth="50px" 
         buttonHeight="50px" 
         [buttonIcon]="newCustomerIcon"
-        (click)="createJobClick()">
+        (click)="createWorkClick()">
     </app-floating-button>
 </div>

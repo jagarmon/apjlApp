@@ -5,6 +5,7 @@ import { Customer } from '../customers/models/customer';
 import { CustomerService } from '../services/customer.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { faFileInvoice } from '@fortawesome/free-solid-svg-icons';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-work-modal',
@@ -16,11 +17,12 @@ export class WorkModalComponent {
   customers= [] as Customer[];
   settingsPressed: boolean = false;
   type: string = "";
-
+  selectedStates = [] as Customer[];
   invoiceIcon=faFileInvoice;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any, 
+    private _router: Router,
     private workService: WorkService,
     private customerService: CustomerService,
     public dialogRef: MatDialogRef<WorkModalComponent>){
@@ -36,13 +38,21 @@ export class WorkModalComponent {
    
     this.customerService.findAll().subscribe(
       (data: Customer[]) => {
-      if(data) this.customers = data;      
+
+      if(data){
+        this.customers = data; 
+        this.selectedStates = data; 
+        if (this.work.customer.firstName === "") this.work.customer = data[0];
+        
+      } 
+
     })
+
+    
   }
 
   saveClick(){
     window.close()
-    console.log("CUSTOMERRR: ",this.work.customer)
       if(this.type === 'create')      
       setTimeout(()=>{
         this.workService.save(this.createWorkObject()).subscribe();
@@ -73,8 +83,22 @@ export class WorkModalComponent {
     return work;
   }
 
-  generateInvoiceClick(){
+  generateInvoiceClick(idWork: number){
+    this.dialogRef.close();
+    this._router.navigateByUrl("trabajos/factura/"+idWork)
+  }
+
+  keyUp(value: any){
+    this.selectedStates = this.search(value.value);
+  }
+  search(value: string) { 
+    let filter = value.toLowerCase();
     
+    return this.customers.filter(option =>{
+      let fullName = option.firstName.toLowerCase() + " " + option.lastName.toLowerCase();
+      
+      return fullName.includes(filter);
+    });
   }
 
 }

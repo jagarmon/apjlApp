@@ -27,10 +27,16 @@
 
     <div class="form-group" [hidden]="!settingsPressed">
         <label for="selectCustomer">Cliente</label>
-        <select name="selectClientName" [compareWith]="compareByID" [(ngModel)]="work.customer" class="form-control" id="selectCustomer">   
-            <option [ngValue]="customer" *ngFor="let customer of customers">{{customer.firstName}}  {{customer.lastName}}</option>
-            
-        </select>
+
+        
+        <mat-select name="selectClientName" [compareWith]="compareByID" [(ngModel)]="work.customer" placeholder="Seleccione cliente" #singleSelect>
+          <mat-option>
+            <ngx-mat-select-search (keyup)="keyUp($event.target)" placeholderLabel="Introduzca cliente..." noEntriesFoundLabel="No existe ningún cliente con ese nombre"></ngx-mat-select-search>
+          </mat-option>
+          <mat-option [value]="customer" *ngFor="let customer of selectedStates">
+            {{customer.firstName}} {{customer.lastName}}
+          </mat-option>
+        </mat-select>
       </div>
 
       <div class="form-group" [hidden]="settingsPressed">
@@ -54,6 +60,6 @@
         buttonHeight="50px"
         buttonPosition="absolute"
         [buttonIcon]="invoiceIcon"
-        (click)="generateInvoiceClick()">
+        (click)="generateInvoiceClick(work.id)">
     </app-floating-button>
   </form>

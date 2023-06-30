@@ -33,7 +33,7 @@ export class CustomersComponent {
   mapCardImage(): void{
     
     this.customers.forEach(customer => {
-      if(customer.image === null) customer.image = "../assets/images/noImg.jpg"
+      if(customer.image === null) customer.image = "assets/images/noImg.jpg"
       
       this.cardList.push({
         idCard: customer.id,

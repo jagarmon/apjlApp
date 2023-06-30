@@ -8,20 +8,25 @@ import { WorksTableComponent } from '../works-table/works-table.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FilterPipe } from '../works-table/filter.pipe';
 import { WorkModalComponent } from '../work-modal/work-modal.component';
-
+import { InvoicingComponent } from '../invoicing/invoicing.component';
+import { MatSelectModule } from '@angular/material/select';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
 @NgModule({
   declarations: [
     WorksComponent,
     WorksTableComponent,
     WorkModalComponent,
-    FilterPipe
+    FilterPipe,
+    InvoicingComponent
   ],
   imports: [
     CommonModule,
     WorksRoutingModule,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxMatSelectSearchModule,
+    MatSelectModule
   ]
 })
 export class WorksModule { }

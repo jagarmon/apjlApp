@@ -84,9 +84,9 @@ export class DetailsModalComponent {
     this.imageService.upload(this.inputFile).subscribe(       
      (data: any)=>{
        if(data.body){
-         customer.image = "../assets/images/"+data.body.fileName+".jpg";
+         customer.image = "assets/images/"+data.body.fileName+".jpg";
        } 
-     }   
+     } 
    ) 
  }
  return customer;

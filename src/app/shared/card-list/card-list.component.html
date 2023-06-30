@@ -8,27 +8,28 @@
     (click)="settingsClick()">
 </app-floating-button>
 
-<div id="container" *ngFor="let data of dataArray">    
-    <div class="card">
+<div class="container-format">
+    <div id="container" *ngFor="let data of dataArray">    
+        <div class="card">
+            
+            <app-floating-button 
+                buttonBorderColor="red" 
+                buttonBackGroundColor="red" 
+                buttonTop="0"
+                buttonRight="0"
+                [buttonIcon]="cancelIcon"
+                *ngIf="settingsPressed"
+                (click)="deleteClick(data)"
+                buttonPosition="absolute">
+            </app-floating-button>
         
-        <app-floating-button 
-            buttonBorderColor="red" 
-            buttonBackGroundColor="red" 
-            buttonTop="0"
-            buttonRight="0"
-            [buttonIcon]="cancelIcon"
-            *ngIf="settingsPressed"
-            (click)="deleteClick(data)"
-            buttonPosition="absolute">
-        </app-floating-button>
-    
-        <img (click)="editClick(data)" class="card-img-top" src="{{data.image}}">
-        <div class="card-body" (click)="editClick(data)">
-            <h3 class="card-title">{{data.field1value}} {{data.field2value}}</h3>
+            <img (click)="editClick(data)" class="card-img-top" (error)="onErrorImage(data)" src="{{data.image}}" >
+            <div class="card-body" (click)="editClick(data)">
+                <h3 class="card-title">{{data.field1value}} {{data.field2value}}</h3>
+            </div>
         </div>
     </div>
 </div>
-
 <app-floating-button 
     buttonBorderColor="green" 
     buttonBackGroundColor="green" 
@@ -37,5 +38,6 @@
     buttonWidth="50px" 
     buttonHeight="50px" 
     [buttonIcon]="newCustomerIcon"
+    [hidden]="settingsPressed"
     (click)="createClick()">
 </app-floating-button>

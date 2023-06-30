@@ -57,6 +57,9 @@ export class CardListComponent {
     
     }
 
+    onErrorImage(data: any){
+      data.image = "assets/images/noImg.jpg"
+    }
     deleteClick(data: any): void{
       
       if(data.type= "updateCustomer"){
@@ -103,7 +106,7 @@ export class CardListComponent {
           field3value: "",
           field4value: "",
           type: "createCustomer",
-          image: "../assets/images/noImg.jpg",
+          image: "assets/images/noImg.jpg",
           settingsPressed: true
         }
       });

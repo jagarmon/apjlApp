@@ -43,10 +43,12 @@ export class CardListComponent {
         field2name: data.field2name,
         field3name: data.field3name,
         field4name: data.field4name,
+        field5name: data.field5name,
         field1value: data.field1value,
         field2value: data.field2value,
         field3value: data.field3value,
         field4value: data.field4value,
+        field5value: data.field5value,
         type: data.type,
         image: data.image,
         settingsPressed: this.settingsPressed
@@ -84,7 +86,7 @@ export class CardListComponent {
 
     showConfirmationModal(data: any): any{
       const modal: any = this._modalService.open(DeleteConfirmationModalComponent);
-      modal.componentInstance.deletedElement = data.field1value + " " + data.field2value;
+      modal.componentInstance.deletedElement = data.field2value + " " + data.field3value;
       return modal;
     }
     createClick(){
@@ -97,14 +99,16 @@ export class CardListComponent {
         width: "600px",
         data: {
           idCard: "",
-          field1name: "Nombre",
-          field2name: "Apellido",
-          field3name: "Dirección",
-          field4name: "Ciudad",
+          field1name: "DNI",
+          field2name: "Nombre",
+          field3name: "Apellido",
+          field4name: "Dirección",
+          field5name: "Ciudad",
           field1value: "",
           field2value: "",
           field3value: "",
           field4value: "",
+          field5value: "",
           type: "createCustomer",
           image: "assets/images/noImg.jpg",
           settingsPressed: true

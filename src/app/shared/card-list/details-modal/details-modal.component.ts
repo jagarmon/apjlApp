@@ -28,11 +28,13 @@ export class DetailsModalComponent {
       this.card.field1name = data.field1name;
       this.card.field2name = data.field2name;
       this.card.field3name = data.field3name;
-      this.card.field4name = data.field4name;
+      this.card.field4name = data.field4name;      
+      this.card.field5name = data.field5name;
       this.card.field1value = data.field1value;
       this.card.field2value = data.field2value;
       this.card.field3value = data.field3value;
       this.card.field4value = data.field4value;
+      this.card.field5value = data.field5value;
       this.card.image = data.image;
       this.card.type = data.type;
     }
@@ -73,10 +75,11 @@ export class DetailsModalComponent {
  createCustomerObject(): Customer{
   let customer: Customer = {
     id: this.card.idCard,
-    firstName: this.card.field1value,
-    lastName: this.card.field2value,
-    address: this.card.field3value,
-    city: this.card.field4value,
+    dni: this.card.field1value,
+    firstName: this.card.field2value,
+    lastName: this.card.field3value,
+    address: this.card.field4value,
+    city: this.card.field5value,
     image: this.card.image
   }
   if (this.inputFile) {    

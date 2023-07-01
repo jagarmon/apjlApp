@@ -37,14 +37,16 @@ export class CustomersComponent {
       
       this.cardList.push({
         idCard: customer.id,
-        field1name: "Nombre",
-        field2name: "Apellido",
-        field3name: "Dirección",
-        field4name: "Ciudad",
-        field1value: customer.firstName,
-        field2value: customer.lastName,
-        field3value: customer.address,
-        field4value: customer.city,
+        field1name: "DNI",
+        field2name: "Nombre",
+        field3name: "Apellido",
+        field4name: "Dirección",
+        field5name: "Ciudad",    
+        field1value: customer.dni,    
+        field2value: customer.firstName,
+        field3value: customer.lastName,
+        field4value: customer.address,
+        field5value: customer.city,
         image: customer.image,
         type: "updateCustomer"
       });

@@ -42,7 +42,7 @@
                 <th (click)="editWorkClick(work)" scope="row">{{work.id}}</th>
                 <td (click)="editWorkClick(work)">{{work.name}}</td>
                 <td (click)="editWorkClick(work)">{{work.city}}</td>
-                <td (click)="editWorkClick(work)">{{work.customer.firstName}}</td>
+                <td (click)="editWorkClick(work)">{{work.customer.firstName}} {{work.customer.lastName}}</td>
                 <td (click)="editWorkClick(work)"><input type="checkbox" name="checkBoxPaid" [checked]="work.paid"/></td>
                 <td>
                     <app-floating-button 

@@ -18,6 +18,9 @@
 
             <label for="field4input">{{card.field4name}}</label>
             <input type="field4" value="{{card.field4value}}" name="field4value" [(ngModel)]="card.field4value" [readonly]="!data.settingsPressed" class="form-control" id="field4input">
+
+            <label for="field5input">{{card.field5name}}</label>
+            <input type="field5" value="{{card.field5value}}" name="field5value" [(ngModel)]="card.field5value" [readonly]="!data.settingsPressed" class="form-control" id="field5input">
         </div>
         <div id="upload-file-group" class="form-group" [hidden]="!data.settingsPressed">
             <label for="input-upload-file">Seleccionar archivo</label>

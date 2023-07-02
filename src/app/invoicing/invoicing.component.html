@@ -1,4 +1,49 @@
-<app-floating-button 
+<form>
+
+    <mat-radio-group name="radioInvoiceType" class="radio-invoice-type" [(ngModel)]="invoiceType">
+        <mat-radio-button [value]="0"  style="margin: 10px">
+          Automático
+        </mat-radio-button>
+        <mat-radio-button [value]="1"  style="margin: 10px">
+            Manual
+          </mat-radio-button>
+    </mat-radio-group>
+    <!--
+    <mat-radio-group name="radioInvoiceType" class="radio-invoice-type" [(ngModel)]="invoiceType">
+        <mat-radio-button *ngFor="let type of invoiceTypeList" name="opciones" [value]="type"  style="margin: 10px">
+          {{type}}
+        </mat-radio-button>
+    </mat-radio-group>
+    -->
+    <label [hidden]="!invoiceType" for="invoiceTextArea">Contenido factura: </label>
+    <textarea rows="5" cols="150" name="invoiceTextArea" [(ngModel)]="textArea" [hidden]="!invoiceType">
+
+    </textarea>
+
+    <div class="input-div">
+        <label [hidden]="!invoiceType" for="inputRazonCobro">Razón cobro:</label>
+        <input name="inputRazonCobro" [(ngModel)]="razonCobro" [hidden]="!invoiceType">
+
+        <label [hidden]="!invoiceType" for="importe">Importe:</label>
+        <input name="importe" [(ngModel)]="importe" [hidden]="!invoiceType">
+
+        <label [hidden]="!invoiceType" for="ivaManual">Iva:</label>
+        <input name="ivaManual" [(ngModel)]="ivaManual" [hidden]="!invoiceType">
+    </div>
+
+    <mat-select [hidden]="invoiceType" [formControl]="treatment" name="select-iva" class="form-control" id="table-filtering-type" #singleSelect>   
+        <mat-option *ngFor="let treatment of treatmentList" [value]="treatment">{{treatment}}</mat-option>                          
+    </mat-select>
+
+    <mat-select [hidden]="invoiceType" [formControl]="iva" name="select-iva" class="form-control" id="table-filtering-type" #singleSelect>   
+        <mat-option *ngFor="let iva of ivaList" [value]="iva">{{iva}}</mat-option>                          
+    </mat-select>
+
+    <mat-select [hidden]="invoiceType" [formControl]="placeType" name="select-iva" class="form-control" id="table-filtering-type" #singleSelect>   
+        <mat-option *ngFor="let placeType of placeTypeList" [value]="placeType">{{placeType}}</mat-option>                          
+    </mat-select>
+
+    <app-floating-button 
     buttonBorderColor="purple" 
     buttonBackGroundColor="purple" 
     buttonLeft="10px" 
@@ -7,16 +52,17 @@
     [buttonIcon]="backIcon"
     >
 </app-floating-button>
-<label for="descriptionInput">Descripción</label>
-<textarea id="descriptionInput" name="textAreaDescription" [(ngModel)]="description"></textarea>
-<app-floating-button 
-    buttonBorderColor="green" 
-    buttonBackGroundColor="green" 
-    buttonLeft="10px" 
-    buttonBottom="10px" 
-    [buttonIcon]="backIcon"
-    (click)="exportAsPDF()"
-    >
-</app-floating-button>
 
-  
+<app-floating-button 
+        buttonBorderColor="green" 
+        buttonBackGroundColor="green" 
+        buttonRight="10px" 
+        buttonBottom="10px" 
+        buttonWidth="50px"
+        buttonHeight="50px"
+        [buttonIcon]="checkIcon"
+        (click)="exportAsPDF()"
+        >
+    </app-floating-button>
+</form>
+

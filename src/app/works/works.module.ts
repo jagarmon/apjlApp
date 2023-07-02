@@ -11,6 +11,7 @@ import { WorkModalComponent } from '../work-modal/work-modal.component';
 import { InvoicingComponent } from '../invoicing/invoicing.component';
 import { MatSelectModule } from '@angular/material/select';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import {MatRadioModule} from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
     SharedModule,
     ReactiveFormsModule,
     NgxMatSelectSearchModule,
-    MatSelectModule
+    MatSelectModule,
+    MatRadioModule
   ]
 })
 export class WorksModule { }

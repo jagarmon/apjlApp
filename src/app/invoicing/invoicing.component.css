@@ -1,0 +1,26 @@
+#select-iva{
+    padding-top: 100px;
+}
+.form-control{
+    margin-top: 100px;
+}
+.radio-invoice-type{
+    display:flex ;
+    width:100%;
+    font-size:0.5em;
+    padding-top: 50px;
+}
+.input-div{
+    display: flex;
+    flex-direction: column;
+}
+input{
+    margin-right: 30px;
+    margin-left: 30px;
+}
+label{
+    margin-left: 30px;
+}
+textarea{
+    margin-left:30px
+}

@@ -1,5 +1,4 @@
 <form>
-
     <mat-radio-group name="radioInvoiceType" class="radio-invoice-type" [(ngModel)]="invoiceType">
         <mat-radio-button [value]="0"  style="margin: 10px">
           Automático
@@ -8,24 +7,18 @@
             Manual
           </mat-radio-button>
     </mat-radio-group>
-    <!--
-    <mat-radio-group name="radioInvoiceType" class="radio-invoice-type" [(ngModel)]="invoiceType">
-        <mat-radio-button *ngFor="let type of invoiceTypeList" name="opciones" [value]="type"  style="margin: 10px">
-          {{type}}
-        </mat-radio-button>
-    </mat-radio-group>
-    -->
+
     <label [hidden]="!invoiceType" for="invoiceTextArea">Contenido factura: </label>
     <textarea rows="5" cols="150" name="invoiceTextArea" [(ngModel)]="textArea" [hidden]="!invoiceType">
 
     </textarea>
 
     <div class="input-div">
-        <label [hidden]="!invoiceType" for="inputRazonCobro">Razón cobro:</label>
-        <input name="inputRazonCobro" [(ngModel)]="razonCobro" [hidden]="!invoiceType">
+        <label [hidden]="!invoiceType" for="inputChargeReason">Razón cobro:</label>
+        <input name="inputChargeReason" [(ngModel)]="chargeReason" [hidden]="!invoiceType">
 
-        <label [hidden]="!invoiceType" for="importe">Importe:</label>
-        <input name="importe" [(ngModel)]="importe" [hidden]="!invoiceType">
+        <label [hidden]="!invoiceType" for="price">Importe:</label>
+        <input name="price" [(ngModel)]="price" [hidden]="!invoiceType">
 
         <label [hidden]="!invoiceType" for="ivaManual">Iva:</label>
         <input name="ivaManual" [(ngModel)]="ivaManual" [hidden]="!invoiceType">

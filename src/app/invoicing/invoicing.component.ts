@@ -26,9 +26,9 @@ export class InvoicingComponent {
 
   textArea: string = "";
 
-  razonCobro: string = "";
+  chargeReason: string = "";
 
-  importe: number = 0;
+  price: number = 0;
 
   ivaManual: number = 10;
 
@@ -76,9 +76,9 @@ export class InvoicingComponent {
 
     doc.setFontSize(9);
 
-    let razonCobro = "\n\n-"+this.razonCobro;
+    let razonCobro = "\n\n-"+this.chargeReason;
 
-    let price = "\n\n-"+this.importe;
+    let price = "\n\n-"+this.price;
 
     let splitText = doc.splitTextToSize(this.textArea, 130);
 
@@ -168,7 +168,7 @@ export class InvoicingComponent {
       if(this.iva.value) ivaValue = this.iva.value;
     } 
     else{
-      price = +this.importe;
+      price = +this.price;
       ivaValue = +this.ivaManual;
     } 
     console.log(ivaValue)

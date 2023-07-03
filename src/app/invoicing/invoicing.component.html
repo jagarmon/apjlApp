@@ -18,10 +18,10 @@
         <input name="inputChargeReason" [(ngModel)]="chargeReason" [hidden]="!invoiceType">
 
         <label [hidden]="!invoiceType" for="price">Importe:</label>
-        <input name="price" [(ngModel)]="price" [hidden]="!invoiceType">
+        <input name="price" type="number" [(ngModel)]="price" [hidden]="!invoiceType">
 
         <label [hidden]="!invoiceType" for="ivaManual">Iva:</label>
-        <input name="ivaManual" [(ngModel)]="ivaManual" [hidden]="!invoiceType">
+        <input name="ivaManual" type="number" [(ngModel)]="ivaManual" [hidden]="!invoiceType">
     </div>
 
     <mat-select [hidden]="invoiceType" [formControl]="treatment" name="select-iva" class="form-control" id="table-filtering-type" #singleSelect>   

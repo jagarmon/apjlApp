@@ -17,15 +17,6 @@
         </div>
         
     </form>
-    
-    <app-floating-button 
-      buttonBorderColor="green" 
-      buttonBackGroundColor="green" 
-      buttonRight="10px" 
-      buttonTop="10px" 
-      [buttonIcon]="settingsIcon"
-      (click)="settingsClick()">
-    </app-floating-button>
 
     <table class="table table-hover">
         <thead>
@@ -55,19 +46,41 @@
                     buttonPosition="absolute">
                     </app-floating-button> 
                 </td>
+                <td>
+                    <app-floating-button 
+                        buttonBorderColor="purple" 
+                        buttonBackGroundColor="purple" 
+                        buttonRight="15px"
+                        buttonPosition="absolute"
+                        [buttonIcon]="invoiceIcon"
+                        (click)="generateInvoiceClick(work)">
+                     </app-floating-button>
+                </td>
             </tr>
         </tbody>
     </table>
 
     <app-floating-button 
-        buttonBorderColor="green" 
+        buttonBorderColor="black" 
         buttonBackGroundColor="green" 
         buttonBottom="10px"
-        buttonRight="10px"
-        buttonWidth="50px" 
-        buttonHeight="50px" 
-        [buttonIcon]="newCustomerIcon"
+        buttonRight="100px"
+        buttonWidth="75px" 
+        buttonHeight="75px" 
+        [buttonIcon]="newWorkIcon"
         [hidden]="settingsPressed"
         (click)="createWorkClick()">
+    </app-floating-button>
+
+    <app-floating-button 
+      buttonBorderColor="black" 
+      buttonBackGroundColor="yellow" 
+      buttonRight="10px" 
+      buttonBottom="10px" 
+      buttonHeight="75px"
+      buttonWidth="75px"
+      buttonIconColor="black"
+      [buttonIcon]="settingsIcon"
+      (click)="settingsClick()">
     </app-floating-button>
 </div>

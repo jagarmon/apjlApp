@@ -1,13 +1,3 @@
-
-<app-floating-button 
-    buttonBorderColor="green" 
-    buttonBackGroundColor="green" 
-    buttonRight="10px" 
-    buttonTop="10px" 
-    [buttonIcon]="settingsIcon"
-    (click)="settingsClick()">
-</app-floating-button>
-
 <div class="container-format">
     <div id="container" *ngFor="let data of dataArray">    
         <div class="card">
@@ -31,13 +21,25 @@
     </div>
 </div>
 <app-floating-button 
-    buttonBorderColor="green" 
-    buttonBackGroundColor="green" 
-    buttonBottom="10px"
-    buttonRight="10px"
-    buttonWidth="50px" 
-    buttonHeight="50px" 
-    [buttonIcon]="newCustomerIcon"
-    [hidden]="settingsPressed"
-    (click)="createClick()">
-</app-floating-button>
+        buttonBorderColor="black" 
+        buttonBackGroundColor="green" 
+        buttonBottom="10px"
+        buttonRight="100px"
+        buttonWidth="75px" 
+        buttonHeight="75px" 
+        [buttonIcon]="newCustomerIcon"
+        [hidden]="settingsPressed"
+        (click)="createClick()">
+    </app-floating-button>
+    
+    <app-floating-button 
+      buttonBorderColor="black" 
+      buttonBackGroundColor="yellow" 
+      buttonRight="10px" 
+      buttonBottom="10px" 
+      buttonHeight="75px"
+      buttonWidth="75px"
+      buttonIconColor="black"
+      [buttonIcon]="settingsIcon"
+      (click)="settingsClick()">
+    </app-floating-button>

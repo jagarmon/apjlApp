@@ -1,21 +1,25 @@
 import { WorkService } from './../services/work.service';
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { faArrowLeft, faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faCheck, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { Work } from '../works/models/work';
 import { Customer } from '../customers/models/customer';
 import jspdf from 'jspdf';
-import { FormControl } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-invoicing',
-  templateUrl: './invoicing.component.html',
-  styleUrls: ['./invoicing.component.css']
+  selector: 'app-invoice-modal',
+  templateUrl: './invoice-modal.component.html',
+  styleUrls: ['./invoice-modal.component.css']
 })
-export class InvoicingComponent {
+export class InvoiceModalComponent {
   checkIcon=faCheck;
   backIcon=faArrowLeft;
+  cancelIcon=faXmark;
 
+  form = {} as FormGroup;
+  
   work = {} as Work;
   
   idNumber = 0;
@@ -48,18 +52,14 @@ export class InvoicingComponent {
   placeTypeList: string[] = ["vivienda", "bloque", "piso", "casa", "terreno"];
 
 
-  constructor(private _route: ActivatedRoute, private workService: WorkService){
-    this.work.customer = {} as Customer
-  }
-  ngOnInit(){
-    this.idNumber = parseInt(this._route.snapshot.paramMap.get('id') as string);
-    
-    this.workService.findWork(this.idNumber).subscribe(
-      (data) => {
-        if (data) this.work = data
-        
-      }
-    );
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private _route: ActivatedRoute, 
+    private workService: WorkService,
+    public dialogRef: MatDialogRef<InvoiceModalComponent>
+    ){
+      this.work = data;
+      console.log(data)
   }
 
   exportAsPDF(){
@@ -112,7 +112,7 @@ export class InvoicingComponent {
     let y: number = 0;
 
     let text: string = "Por la realización del trabajo: "+this.work.name+" en " +
-    this.placeType.value + " situada en "+this.work.address + ", " + this.work.city + "," +
+    this.placeType.value + " en "+this.work.address + ", " + this.work.city + "," +
     " propiedad de "+this.treatment.value+" "+this.work.customer.firstName+" "+
     this.work.customer.lastName+" con DNI "+this.work.customer.dni
 
@@ -203,5 +203,9 @@ export class InvoicingComponent {
       array.pop()
       i--;
     } 
+  }
+
+  closeClick(){
+    this.dialogRef.close();
   }
 }

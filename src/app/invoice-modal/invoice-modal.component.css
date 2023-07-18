@@ -1,0 +1,30 @@
+.radio-invoice-type{
+    display:flex;
+    width:100%;
+    font-size:0.5em;
+    text-align:center
+}
+.input-div{
+    display: flex;
+    flex-direction: column;
+}
+header{
+    padding-left:20px;
+    padding-top:30px;
+}
+body{
+    padding-left:30px;
+    padding-right:30px;
+}
+.form-group{
+    padding-top: 3%; 
+    padding-left: 3%;
+    padding-right: 3%;
+ }
+.div-class{
+    display:flex;
+    text-align:center;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}

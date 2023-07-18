@@ -1,0 +1,91 @@
+   
+<form>
+    <header >
+            <h5>          
+                Crear factura
+            </h5>
+            <div class="div-class" >                
+                    <mat-radio-group name="radioInvoiceType" class="radio-invoice-type" [(ngModel)]="invoiceType">
+                        <mat-radio-button [value]="0"  style="margin: 10px;padding-left:120px;">
+                            Automático
+                        </mat-radio-button>
+                        <mat-radio-button [value]="1"  style="margin: 10px">
+                            Manual
+                        </mat-radio-button>
+                    </mat-radio-group>                
+            </div>
+      </header>
+    <body> 
+        <app-floating-button 
+              buttonBorderColor="black" 
+              buttonBackGroundColor="red" 
+              buttonRight="10px" 
+              buttonTop="10px" 
+              buttonWidth="50px"
+              buttonHeight="50px"
+              [buttonIcon]="cancelIcon"
+              buttonPosition="absolute"
+              (click)="closeClick()"
+              />       
+        <label [hidden]="!invoiceType" for="invoiceTextArea">Contenido factura: </label>
+        <textarea style="width:100%;" rows="5" cols="150" name="invoiceTextArea" [(ngModel)]="textArea" [hidden]="!invoiceType">
+
+        </textarea>
+
+        <div class="input-div">
+            <label [hidden]="!invoiceType" for="inputChargeReason">Razón cobro:</label>
+            <input name="inputChargeReason" [(ngModel)]="chargeReason" [hidden]="!invoiceType">
+
+            <label [hidden]="!invoiceType" for="price">Importe:</label>
+            <input name="price" type="number" [(ngModel)]="price" [hidden]="!invoiceType">
+
+            <label [hidden]="!invoiceType" for="ivaManual">Iva:</label>
+            <input name="ivaManual" type="number" [(ngModel)]="ivaManual" [hidden]="!invoiceType">
+        </div>
+        <div class="form-group">
+            <label for="select-treatment" [hidden]="invoiceType" >Tratamiento:</label>
+                <mat-select [hidden]="invoiceType" [formControl]="treatment" name="select-treatment" class="form-control" id="select-treatment" #singleSelect>   
+                    <mat-option *ngFor="let treatment of treatmentList" [value]="treatment">{{treatment}}</mat-option>                          
+                </mat-select>
+        </div>
+        
+        <div class="form-group">
+            <label for="select-iva" [hidden]="invoiceType" >Iva:</label>
+                <mat-select [hidden]="invoiceType" [formControl]="iva" name="select-iva" class="form-control" id="select-iva" #singleSelect>   
+                    <mat-option *ngFor="let iva of ivaList" [value]="iva">{{iva}}</mat-option>                            
+                </mat-select>
+        </div>
+
+        <div class="form-group">
+            <label for="select-place-type" [hidden]="invoiceType" >Lugar:</label>
+            <mat-select [hidden]="invoiceType" [formControl]="placeType" name="select-place-type" class="form-control" id="select-place-type" #singleSelect>   
+                <mat-option *ngFor="let placeType of placeTypeList" [value]="placeType">{{placeType}}</mat-option>                          
+            </mat-select>
+        </div>
+        
+        <app-floating-button 
+        buttonBorderColor="purple" 
+        buttonBackGroundColor="purple" 
+        buttonLeft="10px" 
+        buttonTop="10px" 
+        buttonWidth="50px"
+        buttonHeight="50px"
+        routerLink="/trabajos"
+        [buttonIcon]="backIcon"
+        >
+    </app-floating-button>
+
+    <app-floating-button 
+            buttonBorderColor="black" 
+            buttonBackGroundColor="green" 
+            buttonRight="10px" 
+            buttonBottom="10px" 
+            buttonWidth="50px"
+            buttonHeight="50px"
+            [buttonIcon]="checkIcon"
+            buttonPosition="absolute"
+            (click)="exportAsPDF()"
+            >
+        </app-floating-button> 
+    </body> 
+</form>

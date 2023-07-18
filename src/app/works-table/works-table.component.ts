@@ -1,12 +1,13 @@
 import { Component, Input } from '@angular/core';
 import { Work } from '../works/models/work';
 import { Router } from '@angular/router';
-import { faGear, faPlus, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faFileInvoice, faPenToSquare, faPlus, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { MatDialog } from '@angular/material/dialog';
 import { WorkModalComponent } from '../work-modal/work-modal.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { WorkService } from '../services/work.service';
-import { DeleteConfirmationModalComponent } from '../shared/card-list/delete-confirmation-modal/delete-confirmation-modal.component';
+import { DeleteConfirmationModalComponent } from '../shared/delete-confirmation-modal/delete-confirmation-modal.component';
+import { InvoiceModalComponent } from '../invoice-modal/invoice-modal.component';
 
 @Component({
   selector: 'app-works-table',
@@ -20,17 +21,19 @@ export class WorksTableComponent {
   
   @Input() works: Work[] = [];
 
-  newCustomerIcon=faPlus;
+  newWorkIcon=faPlus;
 
-  settingsIcon=faGear;
+  settingsIcon=faPenToSquare;
 
   settingsPressed: boolean = false;
 
   cancelIcon=faXmark;
 
+  invoiceIcon=faFileInvoice;
+
 
   constructor(
-     private router: Router,
+     private _router: Router,
      private matDialog: MatDialog, 
      private _modalService: NgbModal,
      private _workService: WorkService
@@ -42,7 +45,7 @@ export class WorksTableComponent {
   createWorkClick(){    
     const modalDialog = this.matDialog.open(WorkModalComponent, {
       closeOnNavigation: false,
-      disableClose: false,
+      disableClose: true,
       id: "work-modal",
       height: "600px",
       width: "600px",
@@ -69,9 +72,9 @@ export class WorksTableComponent {
   }
 
   editWorkClick(work: Work){
-    const modalDialog = this.matDialog.open(WorkModalComponent, {
+    let obj = {
       closeOnNavigation: false,
-      disableClose: false,
+      disableClose: true,
       id: "work-modal",
       height: "600px",
       width: "600px",
@@ -80,7 +83,10 @@ export class WorksTableComponent {
         settingsPressed: this.settingsPressed,
         type: 'update'
       }
-    });
+    }
+    if(!this.settingsPressed)
+      obj.data.type='view'      
+    this.matDialog.open(WorkModalComponent, obj);
   }
 
   deleteWorkClick(work: Work){
@@ -98,6 +104,19 @@ export class WorksTableComponent {
       this._workService.delete(work.id).subscribe()
       window.location.reload()
     },2000);
+  }
+
+  //TODO Llamar a modal
+  generateInvoiceClick(work: Work){
+
+    const modalDialog = this.matDialog.open(InvoiceModalComponent, {
+      closeOnNavigation: false,
+      disableClose: true,
+      id: "invoice-modal",
+      height: "600px",
+      width: "600px",
+      data: work
+    });
   }
   
   settingsClick():void {

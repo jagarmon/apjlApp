@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { InvoicingComponent } from './invoicing.component';
+import { InvoiceModalComponent } from './invoice-modal.component';
 
-describe('InvoicingComponent', () => {
-  let component: InvoicingComponent;
-  let fixture: ComponentFixture<InvoicingComponent>;
+describe('InvoiceModalComponent', () => {
+  let component: InvoiceModalComponent;
+  let fixture: ComponentFixture<InvoiceModalComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ InvoicingComponent ]
+      declarations: [ InvoiceModalComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(InvoicingComponent);
+    fixture = TestBed.createComponent(InvoiceModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

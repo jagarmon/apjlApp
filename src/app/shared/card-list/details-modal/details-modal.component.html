@@ -8,19 +8,19 @@
         <div id="field-form" class="form-group"  >
             
             <label for="field1input">{{card.field1name}}</label>
-            <input type="field1" value="{{card.field1value}}" name="field1value" [(ngModel)]="card.field1value" [readonly]="!data.settingsPressed" class="form-control" id="field1input">
+            <input type="field1" value="{{card.field1value}}" name="field1value" [(ngModel)]="card.field1value" [disabled]="!data.settingsPressed" class="form-control" id="field1input">
             
             <label for="field2input">{{card.field2name}}</label>
-            <input type="field2" value="{{card.field2value}}" name="field2value" [(ngModel)]="card.field2value" [readonly]="!data.settingsPressed" class="form-control" id="field2input">
+            <input type="field2" value="{{card.field2value}}" name="field2value" [(ngModel)]="card.field2value" [disabled]="!data.settingsPressed" class="form-control" id="field2input">
             
             <label for="field3input">{{card.field3name}}</label>
-            <input type="field3" value="{{card.field3value}}" name="field3value" [(ngModel)]="card.field3value" [readonly]="!data.settingsPressed" class="form-control" id="field3input">
+            <input type="field3" value="{{card.field3value}}" name="field3value" [(ngModel)]="card.field3value" [disabled]="!data.settingsPressed" class="form-control" id="field3input">
 
             <label for="field4input">{{card.field4name}}</label>
-            <input type="field4" value="{{card.field4value}}" name="field4value" [(ngModel)]="card.field4value" [readonly]="!data.settingsPressed" class="form-control" id="field4input">
+            <input type="field4" value="{{card.field4value}}" name="field4value" [(ngModel)]="card.field4value" [disabled]="!data.settingsPressed" class="form-control" id="field4input">
 
             <label for="field5input">{{card.field5name}}</label>
-            <input type="field5" value="{{card.field5value}}" name="field5value" [(ngModel)]="card.field5value" [readonly]="!data.settingsPressed" class="form-control" id="field5input">
+            <input type="field5" value="{{card.field5value}}" name="field5value" [(ngModel)]="card.field5value" [disabled]="!data.settingsPressed" class="form-control" id="field5input">
         </div>
         <div id="upload-file-group" class="form-group" [hidden]="!data.settingsPressed">
             <label for="input-upload-file">Seleccionar archivo</label>

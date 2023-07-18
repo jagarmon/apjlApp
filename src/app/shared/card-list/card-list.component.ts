@@ -1,13 +1,14 @@
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { faGear, faXmark, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faXmark, faPlus, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { Card } from './models/card';
 import { CustomerService } from '../../services/customer.service';
 import { DetailsModalComponent } from './details-modal/details-modal.component';
-import { DeleteConfirmationModalComponent } from './delete-confirmation-modal/delete-confirmation-modal.component';
-
+import { DeleteConfirmationModalComponent } from '../delete-confirmation-modal/delete-confirmation-modal.component';
+import { catchError, Observable, throwError, empty } from 'rxjs';
+import { ConfirmationModalComponent } from '../confirmation-modal/confirmation-modal.component';
 
 @Component({
   selector: 'app-card-list',
@@ -20,7 +21,7 @@ export class CardListComponent {
 
   newCustomerIcon=faPlus;
 
-  settingsIcon=faGear;
+  settingsIcon=faPenToSquare
 
   cancelIcon=faXmark;
 
@@ -35,7 +36,7 @@ export class CardListComponent {
       closeOnNavigation: false,
       disableClose: false,
       id: "details-modal",
-      height: "600px",
+      height: "800px",
       width: "600px",
       data: {
         idCard: data.idCard,
@@ -65,12 +66,12 @@ export class CardListComponent {
     deleteClick(data: any): void{
       
       if(data.type= "updateCustomer"){
-
-        let modal = this.showConfirmationModal(data);
+        let modal = this.showDeleteConfirmationModal(data);
 
         modal.result.then((result: any) => {
           if ( result === 'success' ) {
             this.deleteCustomer(data); 
+          }else{
           }
         });   
         }
@@ -78,13 +79,33 @@ export class CardListComponent {
     }
 
     deleteCustomer(data: any){
-      setTimeout(()=>{
-        this.customerService.delete(data.idCard).subscribe()
-        window.location.reload()
-      },2000);
+        
+        this.customerService.delete(data.idCard)
+        .subscribe(
+          (data)=>{
+            window.location.reload()
+          },
+          (error)=>{
+            this.showConfirmationModal(error.error.message)
+          }
+        )
+       
     }
 
-    showConfirmationModal(data: any): any{
+    showConfirmationModal(title: string): any{
+      const modalDialog = this.matDialog.open(ConfirmationModalComponent, {
+        closeOnNavigation: false,
+        disableClose: true,
+        id: "confirmation-modal",
+        height: "200px",
+        width: "400px",
+        data: {
+         title: title
+        }
+      });
+    }
+
+    showDeleteConfirmationModal(data: any): any{
       const modal: any = this._modalService.open(DeleteConfirmationModalComponent);
       modal.componentInstance.deletedElement = data.field2value + " " + data.field3value;
       return modal;
@@ -95,7 +116,7 @@ export class CardListComponent {
         closeOnNavigation: false,
         disableClose: false,
         id: "details-modal",
-        height: "600px",
+        height: "800px",
         width: "600px",
         data: {
           idCard: "",

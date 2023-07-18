@@ -13,4 +13,16 @@
  .button-container{
     text-align: center;
  }
+ .mat-card {
+    box-shadow: none;
+    margin: 555px; padding: 555px;
+}
 
+header{
+    padding-left:20px;
+    padding-top:30px;
+}
+body{
+    padding-left:30px;
+    padding-right:30px;
+}

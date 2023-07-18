@@ -7,8 +7,8 @@ import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./floating-button.component.css']
 })
 export class FloatingButtonComponent {
-  @Input() buttonBorderColor: string = ""
-  @Input() buttonBackGroundColor: string = ""
+  @Input() buttonBorderColor: string = "green"
+  @Input() buttonBackGroundColor: string = "green"
   @Input() buttonIcon!: IconDefinition;
   @Input() buttonLeft: string = "auto";
   @Input() buttonTop: string = "auto";
@@ -17,4 +17,5 @@ export class FloatingButtonComponent {
   @Input() buttonWidth: string = "auto";
   @Input() buttonHeight: string = "auto";
   @Input() buttonPosition: string = "fixed";
+  @Input() buttonIconColor: string = "white";
 }

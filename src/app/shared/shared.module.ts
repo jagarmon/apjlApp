@@ -6,12 +6,14 @@ import { FormsModule } from '@angular/forms';
 import { CardListComponent } from './card-list/card-list.component';
 import { FloatingButtonComponent } from './floating-button/floating-button.component';
 import { DetailsModalComponent } from './card-list/details-modal/details-modal.component';
+import { ConfirmationModalComponent } from './confirmation-modal/confirmation-modal.component';
 
 @NgModule({
   declarations: [
     FloatingButtonComponent,
     CardListComponent,
-    DetailsModalComponent
+    DetailsModalComponent,
+    ConfirmationModalComponent
   ],
   imports: [
     CommonModule,

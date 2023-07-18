@@ -4,7 +4,7 @@ import { WorkService } from '../services/work.service';
 import { Customer } from '../customers/models/customer';
 import { CustomerService } from '../services/customer.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { faFileInvoice } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faFileInvoice, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
 
 @Component({
@@ -15,10 +15,10 @@ import { Router } from '@angular/router';
 export class WorkModalComponent {
   work = {} as Work;
   customers= [] as Customer[];
-  settingsPressed: boolean = false;
   type: string = "";
   selectedStates = [] as Customer[];
-  invoiceIcon=faFileInvoice;
+  checkIcon=faCheck;
+  cancelIcon=faXmark;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any, 
@@ -27,7 +27,6 @@ export class WorkModalComponent {
     private customerService: CustomerService,
     public dialogRef: MatDialogRef<WorkModalComponent>){
       this.work = data.work;
-      this.settingsPressed = data.settingsPressed;
       this.type = data.type;
     }
 
@@ -45,21 +44,19 @@ export class WorkModalComponent {
         if (this.work.customer.firstName === "") this.work.customer = data[0];
         
       } 
-
-    })
-
-    
+    })    
   }
 
   saveClick(){
-    window.close()
       if(this.type === 'create')      
       setTimeout(()=>{
+        console.log("Crear")
         this.workService.save(this.createWorkObject()).subscribe();
         
       },2000);   
     else if(this.type === 'update')
       setTimeout(()=>{
+        console.log("Updatear")
         this.workService.update(this.createWorkObject()).subscribe();
         
       },2000);
@@ -67,6 +64,10 @@ export class WorkModalComponent {
     this.dialogRef.close();
     if(this.type==='create') setTimeout(()=>{window.location.reload();},2000);
     
+  }
+
+  closeClick(){
+    this.dialogRef.close();
   }
   
   createWorkObject(): Work{

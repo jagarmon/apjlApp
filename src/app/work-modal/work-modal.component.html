@@ -1,65 +1,83 @@
 <form>
-
-    <div class="form-group">
-      <label for="nameInput">Nombre del trabajo</label>
-      <input name="inputNameName" class="form-control" [(ngModel)]="work.name" [readonly]="!settingsPressed" id="nameInput" value="{{work.name}}" placeholder="Nombre del trabajo">      
-    </div>
-
-    <div class="form-group">
-      <label for="descriptionInput">Descripción</label>
-      <input name="inputDescriptionName" class="form-control" [(ngModel)]="work.description" [readonly]="!settingsPressed" id="descriptionInput" value="{{work.description}}" placeholder="Descripción del trabajo">
-    </div>
-
-    <div class="form-group">
-        <label for="addressInput">Dirección</label>
-        <input name="inputAddressName" class="form-control" [(ngModel)]="work.address" [readonly]="!settingsPressed" id="addressInput" value="{{work.address}}" placeholder="Dirección">
-    </div>
-
-    <div class="form-group">
-        <label for="cityInput">Ciudad</label>
-        <input name="inputCityName" class="form-control" [(ngModel)]="work.city" [readonly]="!settingsPressed" id="cityInput" value="{{work.city}}" placeholder="Ciudad">
-    </div>
-
-    <div class="form-group">
-        <label for="priceInput">Precio</label>
-        <input name="inputPriceName" class="form-control" [(ngModel)]="work.price" [readonly]="!settingsPressed" id="priceInput" value="{{work.price}}" placeholder="Precio">
-    </div>
-
-    <div class="form-group" [hidden]="!settingsPressed">
-        <label for="selectCustomer">Cliente</label>
-
+      <header>
+        <h5 *ngIf="type === 'view'">
+          Ver trabajo
+        </h5>
+        <h5 *ngIf="type === 'create'">          
+          Crear trabajo
+        </h5>
+        <h5 *ngIf="type === 'update'">          
+          Editar trabajo
+        </h5>
         
-        <mat-select name="selectClientName" [compareWith]="compareByID" [(ngModel)]="work.customer" placeholder="Seleccione cliente" #singleSelect>
-          <mat-option>
-            <ngx-mat-select-search (keyup)="keyUp($event.target)" placeholderLabel="Introduzca cliente..." noEntriesFoundLabel="No existe ningún cliente con ese nombre"></ngx-mat-select-search>
-          </mat-option>
-          <mat-option [value]="customer" *ngFor="let customer of selectedStates">
-            {{customer.firstName}} {{customer.lastName}}
-          </mat-option>
-        </mat-select>
-      </div>
+    </header>
+    <body>   
 
-      <div class="form-group" [hidden]="settingsPressed">
-        <label for="customerInput">Cliente</label>
-        <input class="form-control" readonly="true" id="customerInput" value="{{work.customer.firstName}} {{work.customer.lastName}}" placeholder="Cliente">
-      </div>
-
-    <div class="form-check">
-      <input name="inputPaidName" [(ngModel)]="work.paid" [readonly]="!settingsPressed" type="checkbox" [checked]="work.paid" class="form-check-input" id="paidCheckBox">
-      <label class="form-check-label" for="paidCheckBox">Pagado</label>
-    </div>
-    <div class="button-container">
-      <button [hidden]="!settingsPressed" (click)="saveClick()" type="submit" class="btn btn-primary">Aceptar</button>
-    </div>
-    <app-floating-button 
-        buttonBorderColor="purple" 
-        buttonBackGroundColor="purple" 
-        buttonBottom="20px"
-        buttonRight="10px"
-        buttonWidth="50px" 
+      <app-floating-button 
+        buttonBorderColor="black" 
+        buttonBackGroundColor="red" 
+        buttonRight="10px" 
+        buttonTop="10px" 
+        buttonWidth="50px"
         buttonHeight="50px"
+        [buttonIcon]="cancelIcon"
         buttonPosition="absolute"
-        [buttonIcon]="invoiceIcon"
-        (click)="generateInvoiceClick(work.id)">
-    </app-floating-button>
+        (click)="closeClick()"
+        />
+    
+      <div class="form-group">
+        <label for="nameInput">Nombre del trabajo</label>
+        <input name="inputNameName" class="form-control" [(ngModel)]="work.name" [disabled]="type === 'view'" id="nameInput" value="{{work.name}}" placeholder="Nombre del trabajo">      
+      </div>
+
+      <div class="form-group">
+        <label for="descriptionInput">Descripción</label>
+        <input name="inputDescriptionName" class="form-control" [(ngModel)]="work.description" [disabled]="type === 'view'" id="descriptionInput" value="{{work.description}}" placeholder="Descripción del trabajo">
+      </div>
+
+      <div class="form-group">
+          <label for="addressInput">Dirección</label>
+          <input name="inputAddressName" class="form-control" [(ngModel)]="work.address" [disabled]="type === 'view'" id="addressInput" value="{{work.address}}" placeholder="Dirección">
+      </div>
+
+      <div class="form-group">
+          <label for="cityInput">Ciudad</label>
+          <input name="inputCityName" class="form-control" [(ngModel)]="work.city" [disabled]="type === 'view'" id="cityInput" value="{{work.city}}" placeholder="Ciudad">
+      </div>
+
+      <div class="form-group">
+          <label for="priceInput">Precio</label>
+          <input name="inputPriceName" class="form-control" [(ngModel)]="work.price" [disabled]="type === 'view'" id="priceInput" value="{{work.price}}" placeholder="Precio">
+      </div>
+
+      <div class="form-group">
+          <label for="selectCustomer">Cliente</label>        
+          <mat-select name="selectClientName" [disabled]="type === 'view'" [compareWith]="compareByID" [(ngModel)]="work.customer" placeholder="Seleccione cliente" #singleSelect>
+            <mat-option>
+              <ngx-mat-select-search (keyup)="keyUp($event.target)" placeholderLabel="Introduzca cliente..." noEntriesFoundLabel="No existe ningún cliente con ese nombre"></ngx-mat-select-search>
+            </mat-option>
+            <mat-option [value]="customer" *ngFor="let customer of selectedStates">
+              {{customer.firstName}} {{customer.lastName}}
+            </mat-option>
+          </mat-select>
+        </div>
+
+      <div class="form-check">
+        <input name="inputPaidName" [(ngModel)]="work.paid" [disabled]="type === 'view'" type="checkbox" [checked]="work.paid" class="form-check-input" id="paidCheckBox">
+        <label class="form-check-label" for="paidCheckBox">Pagado</label>
+      </div>
+      <app-floating-button 
+        [hidden]="type==='view'"
+        buttonBorderColor="black" 
+        buttonBackGroundColor="green" 
+        buttonRight="10px" 
+        buttonBottom="10px" 
+        buttonWidth="50px"
+        buttonHeight="50px"
+        [buttonIcon]="checkIcon"
+        buttonPosition="absolute"
+        (click)="saveClick()"
+        />
+      
+    </body>
   </form>

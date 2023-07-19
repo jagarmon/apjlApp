@@ -7,13 +7,15 @@ import { CardListComponent } from './card-list/card-list.component';
 import { FloatingButtonComponent } from './floating-button/floating-button.component';
 import { DetailsModalComponent } from './card-list/details-modal/details-modal.component';
 import { ConfirmationModalComponent } from './confirmation-modal/confirmation-modal.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
     FloatingButtonComponent,
     CardListComponent,
     DetailsModalComponent,
-    ConfirmationModalComponent
+    ConfirmationModalComponent,
+    NavbarComponent
   ],
   imports: [
     CommonModule,
@@ -28,7 +30,8 @@ import { ConfirmationModalComponent } from './confirmation-modal/confirmation-mo
     FormsModule,
     FloatingButtonComponent,    
     CardListComponent,
-    DetailsModalComponent
+    DetailsModalComponent,
+    NavbarComponent
   ]
 })
 export class SharedModule { }

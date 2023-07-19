@@ -1,5 +1,5 @@
-import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Component } from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-confirmation-modal',
@@ -7,17 +7,15 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./confirmation-modal.component.css']
 })
 export class ConfirmationModalComponent {
+  title: string = "";
+  description: string = "";
+	constructor(public modal: NgbActiveModal) {}
 
-  title: string= "";
-  constructor(
-    @Inject(MAT_DIALOG_DATA) public data: any, 
-    public dialogRef: MatDialogRef<ConfirmationModalComponent>
-    ){
-      console.log(data.title)
-      this.title = data.title;
+  cancelClick(): void{
+    this.modal.close("cancelled");
   }
 
-  confirmClick(): void{
-    this.dialogRef.close();
+  continueClick(): void{
+    this.modal.close("success");
   }
 }

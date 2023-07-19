@@ -7,7 +7,6 @@ import { Card } from './models/card';
 import { CustomerService } from '../../services/customer.service';
 import { DetailsModalComponent } from './details-modal/details-modal.component';
 import { DeleteConfirmationModalComponent } from '../delete-confirmation-modal/delete-confirmation-modal.component';
-import { catchError, Observable, throwError, empty } from 'rxjs';
 import { ConfirmationModalComponent } from '../confirmation-modal/confirmation-modal.component';
 
 @Component({
@@ -86,13 +85,18 @@ export class CardListComponent {
             window.location.reload()
           },
           (error)=>{
-            this.showConfirmationModal(error.error.message)
+            this.showConfirmationModal("No se pudo eliminar el cliente",error.error.message)
           }
         )
        
     }
 
-    showConfirmationModal(title: string): any{
+    showConfirmationModal(title: string, description: string): any{
+        const modal: any = this._modalService.open(ConfirmationModalComponent);
+        modal.componentInstance.title = title;
+        modal.componentInstance.description = description;
+        return modal;
+        /*
       const modalDialog = this.matDialog.open(ConfirmationModalComponent, {
         closeOnNavigation: false,
         disableClose: true,
@@ -103,6 +107,7 @@ export class CardListComponent {
          title: title
         }
       });
+      */
     }
 
     showDeleteConfirmationModal(data: any): any{

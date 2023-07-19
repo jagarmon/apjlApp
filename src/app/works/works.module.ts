@@ -10,10 +10,8 @@ import { FilterPipe } from '../works-table/filter.pipe';
 import { WorkModalComponent } from '../work-modal/work-modal.component';
 import { MatSelectModule } from '@angular/material/select';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
-import {MatRadioModule} from '@angular/material/radio';
+import { MatRadioModule } from '@angular/material/radio';
 import { InvoiceModalComponent } from '../invoice-modal/invoice-modal.component';
-import { MatFormFieldControl, MatFormFieldModule } from '@angular/material/form-field';
-import {MatCardModule} from '@angular/material/card'; 
 @NgModule({
   declarations: [
     WorksComponent,
@@ -29,9 +27,7 @@ import {MatCardModule} from '@angular/material/card';
     ReactiveFormsModule,
     NgxMatSelectSearchModule,
     MatSelectModule,
-    MatRadioModule,
-    MatFormFieldModule,
-    MatCardModule
+    MatRadioModule
   ]
 })
 export class WorksModule { }

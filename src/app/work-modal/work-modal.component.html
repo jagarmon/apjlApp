@@ -1,18 +1,17 @@
 <form>
       <header>
         <h5 *ngIf="type === 'view'">
-          Ver trabajo
+          Detalle del trabajo
         </h5>
         <h5 *ngIf="type === 'create'">          
           Crear trabajo
         </h5>
         <h5 *ngIf="type === 'update'">          
           Editar trabajo
-        </h5>
-        
+        </h5>        
     </header>
+    
     <body>   
-
       <app-floating-button 
         buttonBorderColor="black" 
         buttonBackGroundColor="red" 

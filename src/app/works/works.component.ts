@@ -1,7 +1,4 @@
 import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-
-import { DetailsModalComponent } from '../shared/card-list/details-modal/details-modal.component';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { Work } from './models/work';
 import { WorkService } from '../services/work.service';

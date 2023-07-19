@@ -33,8 +33,7 @@ export class WorksTableComponent {
 
 
   constructor(
-     private _router: Router,
-     private matDialog: MatDialog, 
+     private _matDialog: MatDialog, 
      private _modalService: NgbModal,
      private _workService: WorkService
      ){
@@ -43,7 +42,7 @@ export class WorksTableComponent {
 
   
   createWorkClick(){    
-    const modalDialog = this.matDialog.open(WorkModalComponent, {
+    const modalDialog = this._matDialog.open(WorkModalComponent, {
       closeOnNavigation: false,
       disableClose: true,
       id: "work-modal",
@@ -86,7 +85,7 @@ export class WorksTableComponent {
     }
     if(!this.settingsPressed)
       obj.data.type='view'      
-    this.matDialog.open(WorkModalComponent, obj);
+    this._matDialog.open(WorkModalComponent, obj);
   }
 
   deleteWorkClick(work: Work){
@@ -106,10 +105,9 @@ export class WorksTableComponent {
     },2000);
   }
 
-  //TODO Llamar a modal
   generateInvoiceClick(work: Work){
 
-    const modalDialog = this.matDialog.open(InvoiceModalComponent, {
+    const modalDialog = this._matDialog.open(InvoiceModalComponent, {
       closeOnNavigation: false,
       disableClose: true,
       id: "invoice-modal",

@@ -26,7 +26,6 @@ export class CustomersComponent {
     this.customerService.findAll().subscribe(data => {
       this.customers = data;
       this.mapCardImage();
-      
     })
 
   }

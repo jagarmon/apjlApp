@@ -50,13 +50,11 @@ export class WorkModalComponent {
   saveClick(){
       if(this.type === 'create')      
       setTimeout(()=>{
-        console.log("Crear")
         this.workService.save(this.createWorkObject()).subscribe();
         
       },2000);   
     else if(this.type === 'update')
       setTimeout(()=>{
-        console.log("Updatear")
         this.workService.update(this.createWorkObject()).subscribe();
         
       },2000);

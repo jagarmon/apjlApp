@@ -1,18 +1,18 @@
 <div class="container-div">
     <form class="filter">
         <div class="mb-3 row">
-            <label for="table-filtering-search" class="col-xs-3 col-sm-auto col-form-label">Texto a filtrar</label>
+            <label for="table-filtering-search" class="col-xs-3 col-sm-auto col-form-label"><h6>Buscar:</h6></label>
             <div class="col-xs-3 col-sm-auto">
                 <input name="filterName" id="table-filtering-search" class="form-control" type="text" [(ngModel)]="filter" />
-            </div>
-                <label for="table-filtering-type" class="col-xs-3 col-sm-auto col-form-label">Filtrar por:</label>
+            </div>               
+
                 <div class="col-xs-3 col-sm-auto">
-                    <select name="filterTypeName" class="form-control" id="table-filtering-type" [(ngModel)]="filterType">   
-                        <option value="0" selected>Trabajo</option>   
-                        <option value="1">Cliente</option>  
-                        <option value="2">Ciudad</option> +
-                        <option value="3">Pagado</option>                        
-                    </select>
+                    <mat-select name="filterTypeName" class="form-control" id="table-filtering-type" [(ngModel)]="filterType" #singleSelect>   
+                        <mat-option value="0">Trabajo</mat-option>   
+                        <mat-option value="1">Cliente</mat-option>  
+                        <mat-option value="2">Ciudad</mat-option> 
+                        <mat-option value="3">Pagado</mat-option>                        
+                    </mat-select>
                 </div>
         </div>
         

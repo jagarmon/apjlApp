@@ -59,7 +59,6 @@ export class InvoiceModalComponent {
     public dialogRef: MatDialogRef<InvoiceModalComponent>
     ){
       this.work = data;
-      console.log(data)
   }
 
   exportAsPDF(){
@@ -171,7 +170,6 @@ export class InvoiceModalComponent {
       price = +this.price;
       ivaValue = +this.ivaManual;
     } 
-    console.log(ivaValue)
     
 
     doc.setFont("arial","bold")

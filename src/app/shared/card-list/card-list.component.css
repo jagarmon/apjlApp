@@ -7,18 +7,43 @@
     width: 18rem;
     cursor: pointer
 }
-.card-img-top{
-    width: 287px;
-    height: 310px;
+.img-container{
+    margin-top: 5%;
+    text-align: center;
 }
-
-.card-body{
-    border-radius: 3%;
+img{
+    max-width:150px;
+    max-height: 150px;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
 }
 
 .container-format{
     padding-top:5%;
 }
+
+#table-filtering-type{
+    width:120px;
+    min-width: 120px;
+}
+.container-div{
+    text-align: center;
+    padding-top: 100px;
+}
+
+.filter{
+    padding-left: 10%;
+}
+#filterTypeName{
+    width:200px;
+    min-width: 200px;
+}
+#table-filtering-type{
+    width:120px;
+    min-width: 120px;
+}
+
 
 
 

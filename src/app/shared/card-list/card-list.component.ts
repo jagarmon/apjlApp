@@ -26,11 +26,15 @@ export class CardListComponent {
 
   settingsPressed: boolean = false;
 
+  public filterCardList: string = '';
+
+  public filterCardListType: string = '0';
+
   constructor(private matDialog: MatDialog, private customerService: CustomerService, private _modalService: NgbModal){
-  }
     
+  }
+
   editClick(data: any): void {
-        
     const modalDialog = this.matDialog.open(DetailsModalComponent, {
       closeOnNavigation: false,
       disableClose: false,
@@ -96,18 +100,6 @@ export class CardListComponent {
         modal.componentInstance.title = title;
         modal.componentInstance.description = description;
         return modal;
-        /*
-      const modalDialog = this.matDialog.open(ConfirmationModalComponent, {
-        closeOnNavigation: false,
-        disableClose: true,
-        id: "confirmation-modal",
-        height: "200px",
-        width: "400px",
-        data: {
-         title: title
-        }
-      });
-      */
     }
 
     showDeleteConfirmationModal(data: any): any{
@@ -115,8 +107,7 @@ export class CardListComponent {
       modal.componentInstance.deletedElement = data.field2value + " " + data.field3value;
       return modal;
     }
-    createClick(){
-            
+    createClick(){            
       const modalDialog = this.matDialog.open(DetailsModalComponent, {
         closeOnNavigation: false,
         disableClose: false,

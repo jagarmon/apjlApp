@@ -22,8 +22,7 @@ export class WorksComponent {
   ngOnInit(){
 
     this.workService.findAll().subscribe(data => {
-      this.works = data;      
+      this.works = data;  
     })
-
   }
 }

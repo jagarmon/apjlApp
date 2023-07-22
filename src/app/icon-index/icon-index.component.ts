@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { faUser, faBriefcase, faBuilding, faHelmetSafety } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faBriefcase, faBuilding, faFileInvoice } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-icon-index',
@@ -10,5 +10,5 @@ export class IconIndexComponent {
   customersIcon=faUser;
   providersIcon=faBuilding;
   materialIcon=faBriefcase;
-  worksIcon=faHelmetSafety
+  worksIcon=faFileInvoice
 }

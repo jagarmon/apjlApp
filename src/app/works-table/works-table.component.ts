@@ -31,17 +31,16 @@ export class WorksTableComponent {
 
   invoiceIcon=faFileInvoice;
 
-
   constructor(
      private _matDialog: MatDialog, 
      private _modalService: NgbModal,
      private _workService: WorkService
      ){
-
+      
   }
 
   
-  createWorkClick(){    
+  createWorkClick(){
     const modalDialog = this._matDialog.open(WorkModalComponent, {
       closeOnNavigation: false,
       disableClose: true,

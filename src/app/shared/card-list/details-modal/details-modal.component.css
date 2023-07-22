@@ -7,10 +7,6 @@
     padding-top: 5%;
     padding-bottom: 5%;
 }
-.card-img{
-    width: 287px;
-    height: 310px;
-}
 #image-container{
     margin-top: 5%;
     text-align: center;
@@ -24,4 +20,19 @@ input + label{
 }
 label{
     margin-bottom: 1%;
+}
+img{
+    max-width:150px;
+    max-height: 150px;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+header{
+    padding-left:20px;
+    padding-top:30px;
+}
+body{
+    padding-left:30px;
+    padding-right:30px;
 }

@@ -6,3 +6,11 @@
 .filter{
     padding-left: 10%;
 }
+#filterTypeName{
+    width:200px;
+    min-width: 200px;
+}
+#table-filtering-type{
+    width:120px;
+    min-width: 120px;
+}

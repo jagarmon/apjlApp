@@ -7,11 +7,14 @@ import { Work } from '../works/models/work';
 export class FilterPipe implements PipeTransform {
 
   
-  transform(works: Work[], searchWord: string, filterBy: string): any {
+  transform(works: Work[], searchWord: string, filterBy: string): Work[] {
     let result: Work[] = works;
     searchWord = searchWord.toLowerCase();
-    if(filterBy === "0")
-      result = works.filter(val => val.name.toLowerCase().includes(searchWord));
+    
+    console.log("AAAAAA: ",searchWord === "")
+    if(searchWord === "") return result
+    if(filterBy === "0"){
+      result = works.filter(val => val.name.toLowerCase().includes(searchWord));}
     else if(filterBy === "1"){
       result = works.filter(val => val.customer.firstName.toLowerCase().includes(searchWord));      
     }else if(filterBy === "2"){

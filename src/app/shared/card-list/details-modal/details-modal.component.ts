@@ -5,6 +5,7 @@ import { ImageService } from '../../../services/image.service';
 import { Card } from '../models/card';
 import { CustomerService } from '../../../services/customer.service';
 import { Customer } from '../../../customers/models/customer';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-details-modal',
@@ -16,6 +17,8 @@ export class DetailsModalComponent {
   card = {} as Card
   settingsPressed: boolean = false;
   inputFile!: File;
+
+  checkIcon = faCheck;
 
   constructor( 
     @Inject(MAT_DIALOG_DATA) public data: any, 

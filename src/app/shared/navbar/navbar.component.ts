@@ -16,15 +16,5 @@ export class NavbarComponent {
  constructor(private _router: Router, private _route: ActivatedRoute){
     
  }
- ngOninit() {
-  console.log("AAAAAAAAAA",this.selectedRoute); // UrlSegment[]
-}
-
-prueba(){
-  console.log(this.selectedRoute);
-}
-checkRoute(link: string) {
-  console.log(link)
-}
 
 }

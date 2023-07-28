@@ -5,7 +5,7 @@ import { ImageService } from '../../../services/image.service';
 import { Card } from '../models/card';
 import { CustomerService } from '../../../services/customer.service';
 import { Customer } from '../../../customers/models/customer';
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faXmark } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-details-modal',
@@ -19,6 +19,7 @@ export class DetailsModalComponent {
   inputFile!: File;
 
   checkIcon = faCheck;
+  cancelIcon=faXmark;
 
   constructor( 
     @Inject(MAT_DIALOG_DATA) public data: any, 
@@ -33,11 +34,15 @@ export class DetailsModalComponent {
       this.card.field3name = data.field3name;
       this.card.field4name = data.field4name;      
       this.card.field5name = data.field5name;
+      this.card.field6name = data.field6name;
+      this.card.field7name = data.field7name;
       this.card.field1value = data.field1value;
       this.card.field2value = data.field2value;
       this.card.field3value = data.field3value;
       this.card.field4value = data.field4value;
       this.card.field5value = data.field5value;
+      this.card.field6value = data.field6value;
+      this.card.field7value = data.field7value;
       this.card.image = data.image;
       this.card.type = data.type;
     }
@@ -56,6 +61,10 @@ export class DetailsModalComponent {
   
   setTimeout(()=>{window.location.reload()},2000);
 
+ }
+
+ closeClick(): void{  
+  this.dialogRef.close();
  }
 
 
@@ -83,6 +92,8 @@ export class DetailsModalComponent {
     lastName: this.card.field3value,
     address: this.card.field4value,
     city: this.card.field5value,
+    postalCode: this.card.field6value,
+    bankAccount: this.card.field7value,
     image: this.card.image
   }
   if (this.inputFile) {    

@@ -5,5 +5,7 @@ export interface Customer {
     firstName: string;
     address: string;
     city: string;
+    postalCode: string;
+    bankAccount: string;
     image?: string;
 }

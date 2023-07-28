@@ -156,7 +156,7 @@
     symbol-observable "4.0.0"
     yargs "17.6.2"
 
-"@angular/common@^15.0.0", "@angular/common@^15.0.0 || ^16.0.0", "@angular/common@^15.2.0", "@angular/common@15.2.9":
+"@angular/common@^15.0.0", "@angular/common@^15.0.0 || ^16.0.0", "@angular/common@^15.2.0", "@angular/common@>12.0.0", "@angular/common@15.2.9":
   version "15.2.9"
   resolved "https://registry.npmjs.org/@angular/common/-/common-15.2.9.tgz"
   integrity sha512-LM9/UHG2dRrOzlu2KovrFwWIziFMjRxHzSP3Igw6Symw/wIl0kXGq8Fn6RpFP78zmLqnv+IQOoRiby9MCXsI4g==
@@ -186,7 +186,7 @@
   dependencies:
     tslib "^2.3.0"
 
-"@angular/core@^15.0.0", "@angular/core@^15.0.0 || ^16.0.0", "@angular/core@^15.2.0", "@angular/core@15.2.9":
+"@angular/core@^15.0.0", "@angular/core@^15.0.0 || ^16.0.0", "@angular/core@^15.2.0", "@angular/core@>12.0.0", "@angular/core@15.2.9":
   version "15.2.9"
   resolved "https://registry.npmjs.org/@angular/core/-/core-15.2.9.tgz"
   integrity sha512-w46Z1yUXCQfKV7XfnamOoLA2VD0MVUUYVrUjO73mHSskDXSXxfZAEHO9kfUS71Cj35PvhP3mbkqWscpea2WeYg==
@@ -5217,6 +5217,13 @@ neo-async@^2.6.2:
   resolved "https://registry.npmjs.org/neo-async/-/neo-async-2.6.2.tgz"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
+ngx-autosize@^2.0.4:
+  version "2.0.4"
+  resolved "https://registry.npmjs.org/ngx-autosize/-/ngx-autosize-2.0.4.tgz"
+  integrity sha512-+MgkvrJs5k/CdTXpkGnwFq/zhNurT1npuQYgCN/e3oDn3LV7xRJaRJQtYY6j+BwqnN4Tkujr4+6kUQtAMp55mA==
+  dependencies:
+    tslib ">2.0.0"
+
 ngx-mat-select-search@^7.0.2:
   version "7.0.2"
   resolved "https://registry.npmjs.org/ngx-mat-select-search/-/ngx-mat-select-search-7.0.2.tgz"
@@ -6661,7 +6668,7 @@ tslib@^1.9.0:
   resolved "https://registry.npmjs.org/tslib/-/tslib-1.14.1.tgz"
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
 
-tslib@^2.1.0, tslib@^2.3.0, tslib@^2.4.0, tslib@^2.4.1:
+tslib@^2.1.0, tslib@^2.3.0, tslib@^2.4.0, tslib@^2.4.1, tslib@>2.0.0:
   version "2.5.3"
   resolved "https://registry.npmjs.org/tslib/-/tslib-2.5.3.tgz"
   integrity sha512-mSxlJJwl3BMEQCUNnxXBU9jP4JBktcEGhURcPR6VQVlnP0FdDEsIaz0C35dXNGLyRfrATNofF0F5p2KPxQgB+w==

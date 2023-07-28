@@ -9,8 +9,6 @@ import { WorkService } from '../services/work.service';
   styleUrls: ['./works.component.css']
 })
 export class WorksComponent {
-  backIcon=faArrowLeft;
-
   works: Work[] = [];
 
 

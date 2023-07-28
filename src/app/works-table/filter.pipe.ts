@@ -11,7 +11,6 @@ export class FilterPipe implements PipeTransform {
     let result: Work[] = works;
     searchWord = searchWord.toLowerCase();
     
-    console.log("AAAAAA: ",searchWord === "")
     if(searchWord === "") return result
     if(filterBy === "0"){
       result = works.filter(val => val.name.toLowerCase().includes(searchWord));}

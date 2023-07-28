@@ -18,8 +18,8 @@ body{
 }
 .form-group{
     padding-top: 3%; 
-    padding-left: 3%;
-    padding-right: 3%;
+    padding-left: 0.1%;
+    padding-right: 0.1%;
  }
 .div-class{
     display:flex;
@@ -27,4 +27,39 @@ body{
     flex-direction: row;
     justify-content: center;
     align-items: center;
+}
+textarea{
+    resize: vertical
+}
+
+.table{
+    margin-top:3%;
+}
+
+.btn-primary{
+    margin-top:3%;
+}
+
+.buttonDiv{
+    width: 1125px;
+    text-align:right;
+    justify-content: bottom;
+    
+}
+
+.confirmButton{
+    z-index: 10;
+    align-items:center;
+    justify-content:center;
+    border-radius: 50%;
+    width:50px;
+    height:50px;
+    border-color:black;
+    background-color:green;
+    color: white;
+    position:relative;
+    right:10px;
+    bottom:10px;
+    margin-right:20px;
+    bottom:10px
 }

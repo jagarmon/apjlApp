@@ -16,8 +16,6 @@ export class CustomersComponent {
   customers: Customer[] = [];
   cardList: Card[] = [];
 
-  backIcon=faArrowLeft;
-
   constructor(private matDialog: MatDialog, private customerService: CustomerService){
 
   }
@@ -41,11 +39,15 @@ export class CustomersComponent {
         field3name: "Apellido",
         field4name: "Dirección",
         field5name: "Ciudad",    
+        field6name: "Código postal",    
+        field7name: "Número de cuenta",    
         field1value: customer.dni,    
         field2value: customer.firstName,
         field3value: customer.lastName,
         field4value: customer.address,
         field5value: customer.city,
+        field6value: customer.postalCode,
+        field7value: customer.bankAccount,
         image: customer.image,
         type: "updateCustomer"
       });

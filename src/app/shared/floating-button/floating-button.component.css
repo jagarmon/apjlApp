@@ -1,7 +1,5 @@
 .floating-button-class{
-    position: fixed;
     z-index: 10;
-    display: flex;
     align-items:center;
     justify-content:center;
     border-radius: 50%;

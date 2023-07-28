@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { Work } from '../works/models/work';
-import { Router } from '@angular/router';
 import { faFileInvoice, faPenToSquare, faPlus, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { MatDialog } from '@angular/material/dialog';
 import { WorkModalComponent } from '../work-modal/work-modal.component';
@@ -30,6 +29,8 @@ export class WorksTableComponent {
   cancelIcon=faXmark;
 
   invoiceIcon=faFileInvoice;
+
+  
 
   constructor(
      private _matDialog: MatDialog, 
@@ -110,8 +111,8 @@ export class WorksTableComponent {
       closeOnNavigation: false,
       disableClose: true,
       id: "invoice-modal",
-      height: "600px",
-      width: "600px",
+      height: "700px",
+      width: "1200px",
       data: work
     });
   }
@@ -125,5 +126,7 @@ export class WorksTableComponent {
     modal.componentInstance.deletedElement = work.name;
     return modal;
   }
+
+ 
     
 }

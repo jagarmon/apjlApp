@@ -9,6 +9,17 @@
         <div id="image-container">
             <img class="card-img" src="{{card.image}}">
         </div>
+            <app-floating-button 
+            buttonBorderColor="black" 
+            buttonBackGroundColor="red" 
+            buttonRight="10px" 
+            buttonTop="10px" 
+            buttonWidth="50px"
+            buttonHeight="50px"
+            [buttonIcon]="cancelIcon"
+            buttonPosition="absolute"
+            (click)="closeClick()"
+    />
         <div id="group-of-groups">
             <div id="field-form" class="form-group"  >
                 
@@ -26,6 +37,13 @@
     
                 <label for="field5input">{{card.field5name}}</label>
                 <input type="field5" value="{{card.field5value}}" name="field5value" [(ngModel)]="card.field5value" [disabled]="!data.settingsPressed" class="form-control" id="field5input">
+                
+                <label for="field6input">{{card.field6name}}</label>
+                <input type="field6" value="{{card.field6value}}" name="field6value" [(ngModel)]="card.field6value" [disabled]="!data.settingsPressed" class="form-control" id="field6input">
+
+                <label for="field7input">{{card.field7name}}</label>
+                <input type="field7" value="{{card.field7value}}" name="field7value" [(ngModel)]="card.field7value" [disabled]="!data.settingsPressed" class="form-control" id="field7input">
+
             </div>
             <div id="upload-file-group" class="form-group" [hidden]="!data.settingsPressed">
                 <label for="input-upload-file">Seleccionar archivo</label>
@@ -33,7 +51,7 @@
             </div>
         </div>
 
-        <app-floating-button 
+        <app-floating-button [hidden]="!settingsPressed"
         buttonBorderColor="black" 
         buttonBackGroundColor="green" 
         buttonRight="10px" 

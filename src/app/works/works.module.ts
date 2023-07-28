@@ -5,11 +5,11 @@ import { WorksComponent } from './works.component';
 import { WorksRoutingModule } from './works-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { WorksTableComponent } from '../works-table/works-table.component';
-import { ReactiveFormsModule } from '@angular/forms';
 import { FilterPipe } from '../works-table/filter.pipe';
 import { WorkModalComponent } from '../work-modal/work-modal.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { InvoiceModalComponent } from '../invoice-modal/invoice-modal.component';
+import {AutosizeModule} from 'ngx-autosize';
 @NgModule({
   declarations: [
     WorksComponent,
@@ -22,7 +22,8 @@ import { InvoiceModalComponent } from '../invoice-modal/invoice-modal.component'
     CommonModule,
     WorksRoutingModule,
     SharedModule,
-    MatRadioModule
+    MatRadioModule,
+    AutosizeModule
   ]
 })
 export class WorksModule { }

@@ -113,7 +113,14 @@ export class WorksTableComponent {
       id: "invoice-modal",
       height: "700px",
       width: "1200px",
-      data: work
+      data:{ 
+        data: work,
+        rows: [
+          {
+            concept: "",
+            price: 0
+          }]
+      }
     });
   }
   

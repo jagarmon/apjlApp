@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { Work } from './models/work';
 import { WorkService } from '../services/work.service';
 
@@ -14,8 +13,6 @@ export class WorksComponent {
 
   constructor(private workService: WorkService){
   }
-
-
   
   ngOnInit(){
 

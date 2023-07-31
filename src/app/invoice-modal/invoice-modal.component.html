@@ -1,6 +1,3 @@
-
-
-   <!-- invoicetype === 0 ? createWorkClick() : cambiarParams-->
    <form>
     <header >
             <h5>          
@@ -19,32 +16,37 @@
               buttonPosition="absolute"
               (click)="closeClick()"
         />
-        
-        <label hidden for="invoiceTextArea">Contenido factura: </label>
-        <textarea hidden style="width:100%;" rows="5" cols="150" name="invoiceTextArea" [(ngModel)]="textArea" >
 
-        </textarea>
+        <div class="form-group" [hidden]="!invoice.invoiceID">
+          <label for="textInvoiceID">ID factura</label>        
+          <input disabled style="width: 100%" name="textInvoiceID" [value]="invoice.invoiceID" type="text">
+        </div>
+
+        <div class="form-group" [hidden]="!invoice.invoiceID">
+          <label for="textDate">Fecha</label>        
+          <input disabled style="width: 100%" name="textDate" [value]="invoice.date" type="text">
+        </div>
 
         <div class="form-group">
-            <label for="select-treatment" >Tratamiento:</label>
-                <mat-select [formControl]="treatment" name="select-treatment" class="form-control" id="select-treatment" #singleSelect>   
-                    <mat-option *ngFor="let treatment of treatmentList" [value]="treatment">{{treatment}}</mat-option>                          
-                </mat-select>
+          <label for="textCustomer">Cliente</label>        
+          <input disabled style="width: 100%" name="textCustomer" [value]="work.customer.firstName + ' ' + work.customer.lastName" type="text">
         </div>
         
-        <div class="form-group">
+        <div class="form-group" [hidden]="!invoice.invoiceID">
             <label for="select-iva" >Iva:</label>
                 <mat-select [formControl]="iva" name="select-iva" class="form-control" id="select-iva" #singleSelect>   
                     <mat-option *ngFor="let iva of ivaList" [value]="iva">{{iva}}</mat-option>                            
                 </mat-select>
         </div>
 
-        <div class="form-group">
-            <label for="select-place-type" >Lugar:</label>
-            <mat-select [formControl]="placeType" name="select-place-type" class="form-control" id="select-place-type" #singleSelect>   
-                <mat-option *ngFor="let placeType of placeTypeList" [value]="placeType">{{placeType}}</mat-option>                          
-            </mat-select>
-        </div>
+        <div class="form-group" [hidden]="!invoice.invoiceID">
+          <label for="select-work" >Trabajo:</label>
+          <!--
+              <mat-select [formControl]="work" name="select-iva" class="form-control" id="select-iva" #singleSelect>   
+                  <mat-option *ngFor="let work of works" [value]="work">{{work}}</mat-option>                            
+              </mat-select>
+          -->
+      </div>
 
         <table class="table table-bordered">
             <thead>
@@ -66,8 +68,11 @@
             </tbody>
           </table>     
           <button (click)="addNewRow()">Añadir concepto</button>
-          <div class="buttonDiv">
-            <button class="confirmButton" (click)="exportPDF()"><fa-icon [icon]="checkIcon"></fa-icon></button>
+          <div class="buttonDiv" [hidden]="invoice.invoiceID">
+            <button class="confirmButton" (click)="createInvoice()"><fa-icon [icon]="checkIcon"></fa-icon></button>
+          </div>
+          <div class="buttonDiv" [hidden]="!invoice.invoiceID">
+            <button class="invoiceButton" (click)="exportPDF()"><fa-icon [icon]="invoiceIcon"></fa-icon></button>
           </div>
 
         </body> 

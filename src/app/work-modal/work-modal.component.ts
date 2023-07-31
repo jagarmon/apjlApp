@@ -7,9 +7,6 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { faCheck, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
 
-//COD POSTAL
-//Nº FACTURA
-//FORMA PAGO
 @Component({
   selector: 'app-work-modal',
   templateUrl: './work-modal.component.html',

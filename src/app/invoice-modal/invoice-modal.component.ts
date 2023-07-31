@@ -1,11 +1,14 @@
-import { WorkService } from './../services/work.service';
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { faArrowLeft, faCheck, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faFileInvoice, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { Work } from '../works/models/work';
 import jspdf from 'jspdf';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { InvoiceService } from '../services/invoice.service';
+import { Invoice } from '../invoices/models/invoice';
+import { Customer } from '../customers/models/customer';
+import { CustomerService } from '../services/customer.service';
 
 @Component({
   selector: 'app-invoice-modal',
@@ -14,16 +17,20 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 })
 //Crear nueva pagina, IVA mockeado, Introducir los datos del usuario que faltan, y los que estan meterlos en el formulario
 export class InvoiceModalComponent {
+  
   checkIcon=faCheck;
   cancelIcon=faXmark;
+  invoiceIcon= faFileInvoice;
 
   form = {} as FormGroup;
   
-  work = {} as Work;
-  
-  idNumber = 0;
+  work: any;
 
-  textArea: string = "";
+  invoice = {} as Invoice;
+
+  selectedStates = [] as Customer[];
+
+  customers= [] as Customer[];
 
   invoiceHeader: string = "Inscrita en el registro mercantil de [Ciudad], tomo [numTomo], hoja nº [numHoja]"
 
@@ -46,20 +53,32 @@ export class InvoiceModalComponent {
   iva = new FormControl(10);
   ivaList: number[] = [21, 10, 5, 4, 0];
 
-  treatment = new FormControl("Don");
-  treatmentList: string[] = ["Don", "Dña", ""];
 
-  placeType = new FormControl("vivienda");
-  placeTypeList: string[] = ["vivienda", "bloque", "piso", "casa", "terreno"];
-
+  ngOnInit(){
+    this.customerService.findAll().subscribe(
+      (data: Customer[]) => {
+      if(data){
+        this.customers = data;
+        this.selectedStates = data; 
+        //console.log(this.work.work)     
+      } 
+    })    
+  }
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: any,
+    @Inject(MAT_DIALOG_DATA) public object: any,
     private _route: ActivatedRoute, 
-    private workService: WorkService,
+    private _router: Router,
+    private _invoiceService: InvoiceService,
+    private customerService: CustomerService,
     public dialogRef: MatDialogRef<InvoiceModalComponent>
     ){
-      this.work = data;
+      if(object.data.invoiceID){
+        this.invoice = object.data
+        this.work = object.data.work
+        }
+      else this.work = object.data;
+      this.rows = object.rows
   }
 
   
@@ -76,7 +95,8 @@ export class InvoiceModalComponent {
     this.setBodyFormat(doc)
     doc.text(this.companyContact, 55, y+=13)
 
-    doc.text("Factura Nº: " + "1095674758-334"+"     "+"FECHA: "+"12/12/2023",15,y+=25);
+    let date = new Date();
+    doc.text("Factura Nº: " + "1095674758-334"+"     "+"FECHA: "+this.invoice.date,15,y+=25);
     doc.text("Forma de pago: "+this.work.customer.bankAccount,15,y+5)
 
     this.setTitleFormat(doc);
@@ -260,4 +280,80 @@ export class InvoiceModalComponent {
       price: 0
     });
   }
+
+  async createInvoice(){
+    const doc = new jspdf();
+    let conceptText: string = "";
+    let priceArray: string[] = [];
+    let totalPrice: number = 0;
+    for (var i = 0; i < this.rows.length; i++) {
+      conceptText += this.rows[i].concept+"\n\n";
+      if(i < this.rows.length-1){
+        conceptText += "--addedLineByRow--"+"\n"
+      }
+      priceArray.push("-"+this.rows[i].price.toString()+"€");
+      totalPrice += this.rows[i].price;
+    }
+    let splitText: string[] = this.addPriceToText(doc, conceptText, priceArray)
+    
+    doc.text(splitText,15,15);
+
+    let ivaValue: number = 10;
+      if(this.iva.value)
+        ivaValue = this.iva.value
+
+    let pricesArray: number[] = [];
+    this.rows.forEach(value =>{
+      pricesArray.push(value.price)
+    })
+    let invoice: Invoice = {
+      id: 0,
+      invoiceID: "",
+      date: this.calculateDate(),
+      concept: conceptText,
+      prices: pricesArray.toString(),
+      totalPrice: totalPrice,
+      invoiceState: "Borrador",
+      iva: ivaValue,
+      work: this.work
+    }
+    await this._invoiceService.save(invoice).subscribe();
+    this.dialogRef.close();
+    this._router.navigateByUrl("/facturas").then(() => {
+      window.location.reload();
+    });
+  }
+
+  calculateDate(): string{
+    let inputDate = new Date();
+    let date = inputDate.getDate(); 
+    let month = inputDate.getMonth() + 1; 
+    let resYear = inputDate.getFullYear().toString();
+
+    let resDate: string = inputDate.getDate().toString();
+    let resMonth: string = month.toString();
+    if (date < 10) {  resDate = '0' + resDate; } 
+    if (month < 10) {  resMonth = '0' + resMonth; }
+
+    return resDate + '/' + resMonth + '/' + resYear
+  }
+
+  keyUp(value: any){
+    this.selectedStates = this.search(value.value);
+  }
+  search(value: string) { 
+    let filter = value.toLowerCase();
+    
+    return this.selectedStates.filter(option =>{
+      let fullName = option.firstName.toLowerCase() + " " + option.lastName.toLowerCase();
+      
+      return fullName.includes(filter);
+    });
+  }
+  compareByID(itemOne: any, itemTwo: any){
+    console.log(itemOne)
+    console.log(itemTwo)
+    console.log(this.work)
+    return itemOne && itemTwo && itemOne.id == itemTwo.id;
+    }
 }

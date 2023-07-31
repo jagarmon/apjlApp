@@ -9,6 +9,7 @@ const routes: Routes = [
 },
   { path: 'clientes', loadChildren: () => import('./customers/customers.module').then(m => m.CustomersModule) },
   { path: 'trabajos', loadChildren: () => import('./works/works.module').then(m => m.WorksModule), canActivate: [DirectAccessGaurd] },
+  { path: 'facturas', loadChildren: () => import('./invoices/invoices.module').then(m => m.InvoicesModule) },
   { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule) },
   { path: '',   redirectTo: '/home', pathMatch: 'full' },
   { path: '**', loadChildren: () => import('./not-found-exception/not-found-exception.module').then(m => m.NotFoundExceptionModule) }

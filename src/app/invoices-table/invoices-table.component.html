@@ -1,0 +1,26 @@
+<div class="container-div">
+       <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Número factura</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Trabajo</th>
+            <th scope="col">Cliente</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Pagado</th>
+        </tr>
+        </thead>
+        <tbody>            
+            <tr *ngFor="let invoice of invoices">
+                <td (click)="editInvoiceClick(invoice)" scope="row">{{invoice.invoiceID}}</td>
+                <td (click)="editInvoiceClick(invoice)">{{invoice.invoiceState}}</td>
+                <td (click)="editInvoiceClick(invoice)">{{invoice.work.name}}</td>
+                <td (click)="editInvoiceClick(invoice)">{{invoice.work.customer.firstName}} {{invoice.work.customer.lastName}}</td>
+                <td (click)="editInvoiceClick(invoice)">{{invoice.totalPrice}}</td>
+                <td (click)="editInvoiceClick(invoice)"><input type="checkbox" name="checkBoxPaid" [checked]="invoice.work.paid"/></td>                        
+            </tr>
+        </tbody>
+    </table>
+
+   
+</div>

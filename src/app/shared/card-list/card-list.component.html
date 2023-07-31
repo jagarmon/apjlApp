@@ -18,8 +18,7 @@
         
     </form>
     <div id="container" *ngFor="let data of dataArray | filterCardList : filterCardList : filterCardListType">
-        <div class="card" (click)="editClick(data)">
-    
+        <div class="card">    
             <app-floating-button 
                 buttonBorderColor="red" 
                 buttonBackGroundColor="red" 
@@ -30,12 +29,12 @@
                 (click)="deleteClick(data)"
                 buttonPosition="absolute">
             </app-floating-button>
-            <div class="card-title">
+            <div class="card-title" (click)="editClick(data)">
                 <div class="img-container">
                     <img (error)="onErrorImage(data)" src="{{data.image}}" >
                 </div>
             </div>
-            <div class="card-body">
+            <div class="card-body" (click)="editClick(data)">
                 <h3 class="card-title">{{data.field2value}} {{data.field3value}}</h3>
             </div>
         </div>

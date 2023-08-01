@@ -20,7 +20,6 @@ export class InvoiceService {
   }
 
   public save(invoice: Invoice): Observable<Invoice> {
-    console.log((this.invoicesUrl+"/nuevo"));
     return this.http.post<Invoice>(this.invoicesUrl+"/nuevo", invoice);
   }
 

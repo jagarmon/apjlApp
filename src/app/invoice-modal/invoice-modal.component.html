@@ -39,15 +39,6 @@
                 </mat-select>
         </div>
 
-        <div class="form-group" [hidden]="!invoice.invoiceID">
-          <label for="select-work" >Trabajo:</label>
-          <!--
-              <mat-select [formControl]="work" name="select-iva" class="form-control" id="select-iva" #singleSelect>   
-                  <mat-option *ngFor="let work of works" [value]="work">{{work}}</mat-option>                            
-              </mat-select>
-          -->
-      </div>
-
         <table class="table table-bordered">
             <thead>
               <tr>
@@ -58,7 +49,7 @@
             <tbody>
               <tr *ngFor="let row of rows; let i = index">
                 <td width="650px">
-                    <textarea autosize style="width:100%;" name="invoiceTextArea{{i}}" [(ngModel)]="row.concept"></textarea>
+                    <textarea  autosize style="width:100%;" name="invoiceTextArea{{i}}" [(ngModel)]="row.concept"></textarea>
                 </td>
                 <td width="50px">
                     <input style="width: 100%" name="price{{i}}" type="number" [(ngModel)]="row.price">
@@ -71,9 +62,19 @@
           <div class="buttonDiv" [hidden]="invoice.invoiceID">
             <button class="confirmButton" (click)="createInvoice()"><fa-icon [icon]="checkIcon"></fa-icon></button>
           </div>
-          <div class="buttonDiv" [hidden]="!invoice.invoiceID">
-            <button class="invoiceButton" (click)="exportPDF()"><fa-icon [icon]="invoiceIcon"></fa-icon></button>
-          </div>
+          <div class="buttonContainer">
+            <div class="buttonDiv" [hidden]="!invoice.invoiceID">
+              <button class="invoiceButton" (click)="exportPDF()"><fa-icon [icon]="invoiceIcon"></fa-icon></button>
+            </div>
+
+            <div class="buttonDiv" [hidden]="!invoice.invoiceID">
+              <button class="confirmButton" (click)="editInvoice()"><fa-icon [icon]="checkIcon"></fa-icon></button>
+            </div>
+
+            <div [hidden]="!invoice.invoiceID">
+              <button class="confirmButton" (click)="changeState()"><fa-icon [icon]="invoiceIcon"></fa-icon></button>
+            </div>
+          </div>         
 
         </body> 
     

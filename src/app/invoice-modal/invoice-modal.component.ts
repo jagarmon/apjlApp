@@ -9,6 +9,9 @@ import { InvoiceService } from '../services/invoice.service';
 import { Invoice } from '../invoices/models/invoice';
 import { Customer } from '../customers/models/customer';
 import { CustomerService } from '../services/customer.service';
+import { Context } from '../invoices/state/context';
+import { Draft } from '../invoices/state/draft';
+import { Published } from '../invoices/state/published';
 
 @Component({
   selector: 'app-invoice-modal',
@@ -22,6 +25,8 @@ export class InvoiceModalComponent {
   cancelIcon=faXmark;
   invoiceIcon= faFileInvoice;
 
+  settingsPressed: boolean = false;
+
   form = {} as FormGroup;
   
   work: any;
@@ -32,17 +37,8 @@ export class InvoiceModalComponent {
 
   customers= [] as Customer[];
 
-  invoiceHeader: string = "Inscrita en el registro mercantil de [Ciudad], tomo [numTomo], hoja nº [numHoja]"
-
-  companyName: string = "CONSTRUCCIONES N.A.M.E., S.L.\n       HNOS. NAMEE NAMEEEe"
-  companyContact: string = "C/ INVENTADA Nº405 - Teléfonos 123 456 789 - 987 654 321 - 456 789 123\n              80599 POBLACION INVENTADA (Zaragoza)\n"+
-  "                                          CIF: 999999999\n                         Email: email_email@hotmail.com"
-
-  invoiceFooter: string = "De acuerdo con lo que establece el reglamento europeo de protección de datos "+
-  "RGPD 2016/679 y la Ley Orgánica de Protección de datos y garantía de derechos digitales (LOPD-GDD) del "+
-  "5 de diciembre de 2018, le informamos que los datos personales recogidos en este documento serán "+
-  "incluidos en un fichero bajo responsabilidad de [NOMBRE EMPRESA], con la finalidad "+
-  "de cumplir los compromisos entre ambos, pudiendo rectificar, u oponer sus datos personales en [DIRECCIÓN]"
+  
+  context = {} as Context;
 
   rows = [
     {
@@ -59,8 +55,7 @@ export class InvoiceModalComponent {
       (data: Customer[]) => {
       if(data){
         this.customers = data;
-        this.selectedStates = data; 
-        //console.log(this.work.work)     
+        this.selectedStates = data;    
       } 
     })    
   }
@@ -76,136 +71,25 @@ export class InvoiceModalComponent {
       if(object.data.invoiceID){
         this.invoice = object.data
         this.work = object.data.work
-        }
+        this.settingsPressed = object.settingsPressed
+        if(object.data.invoiceState === 'Borrador')
+          this.context = new Context(new Draft());
+        else if (object.data.invoiceState === 'Publicado')
+          this.context = new Context(new Published());
+      }
       else this.work = object.data;
       this.rows = object.rows
   }
 
-  
-  setHeader(doc: jspdf): number{
-    let y = 0;
-    //HEADER
-    this.setBodyFormat(doc)
-    doc.text(this.invoiceHeader,15,y+=15);
-    doc.addImage("assets/images/company.png", "png", 15, y+=5, 40, 40, "", "NONE", 0)
-
-    this.setTitleFormat(doc);
-    doc.text(this.companyName,60,y+=10)
-
-    this.setBodyFormat(doc)
-    doc.text(this.companyContact, 55, y+=13)
-
-    let date = new Date();
-    doc.text("Factura Nº: " + "1095674758-334"+"     "+"FECHA: "+this.invoice.date,15,y+=25);
-    doc.text("Forma de pago: "+this.work.customer.bankAccount,15,y+5)
-
-    this.setTitleFormat(doc);
-    doc.text("Descripción",15,y+=15);
-    doc.text("Importe",160,y)
-
-    this.setBodyFormat(doc)
-    doc.setFont("arial", "normal")
-    y+=2
-    doc.line(15,y,180,y)
-
-    return y;
+  closeClick(){
+    this.dialogRef.close();
   }
 
-
-  setFooter(doc: jspdf): number{   
-    //FOOTER    
-    let y = 260
-    doc.line(15,260,180,260)
-    doc.text("Base imponible",40,y+=3);
-    doc.text("% IVA",70,y);
-    doc.text("Cuota IVA",90,y);
-
-    doc.setFont("arial", "bold")
-    doc.text("Total factura",120,y);
-    doc.line(15,265,180,y+=2);
-
-    doc.setFont("arial", "normal");
-
-    doc.text( doc.splitTextToSize(this.invoiceFooter, 180), 15, y+=8);
-
-    return y;
-  }
-
-  populateFooter(doc: jspdf, totalPrice: string){
-    let price: number = 0;
-    let ivaValue: number = 0;
-    if(this.iva.value) ivaValue = this.iva.value;    
-    
-
-    doc.setFont("arial","bold")
-
-    //Base imponible
-    doc.text(totalPrice+"€",40,268);
-     
-    let ivaCalculated: number = 0;
-    
-
-    //Cuota IVA
-    ivaCalculated = parseInt(totalPrice) * (+ivaValue/100); 
-       
-    //IVA
-    doc.text(ivaValue.toString()+"%",70,268);
-
-    //Cuota IVA
-    doc.text(ivaCalculated.toFixed(2).toString()+"€",90,268);
-    //Total factura
-    doc.setFont("arial", "bold")
-    let totalPriceInvoice: number = ivaCalculated + parseInt(totalPrice);
-    
-    doc.text(totalPriceInvoice.toString()+"€",120,268);
-  }
-
-  exportPDF(){
-    const doc = new jspdf();
-
-    doc.setFontSize(9);
-    
-    let y: number = 0;
-
-    y = this.setHeader(doc)   
-    let text: string = "";
-    
-      let conceptText: string = "";
-      let priceArray: string[] = []
-      for (var i = 0; i < this.rows.length; i++) {
-        conceptText += this.rows[i].concept+"\n\n";
-        if(i < this.rows.length-1){
-          conceptText += "--addedLineByRow--"+"\n"
-        }
-        priceArray.push("-"+this.rows[i].price.toString()+"€")
-      }
-      text = conceptText    
-    
-      let splitText: string[] = this.addPriceToText(doc, text, priceArray)
-    
-    
-      let lineHeight = doc.getLineHeight() / doc.internal.scaleFactor
-      let lines = splitText.length; 
-
-      let totalPriceY: number = 0
-
-      doc.text(splitText,15,y+=5);
-
-      totalPriceY = totalPriceY + y + (lineHeight * lines)  
-
-      doc.setFont("arial", "bold")
-      doc.text("\n\n"+"Total: " ,15,totalPriceY);
-      let totalPrice: string = this.calculateTotalPrice(priceArray);
-      doc.text("\n\n"+totalPrice+"€",160,totalPriceY);
-
-      this.setFooter(doc);
-
-      this.populateFooter(doc, totalPrice);
-      
-      
-      doc.output('dataurlnewwindow');
-      doc.save("factura_"+this.work.customer.firstName+"_"+this.work.customer.lastName)
-  
+  addNewRow(){
+    this.rows.push({
+      concept: "",
+      price: 0
+    });
   }
 
   addPriceToText(doc: jspdf, text: string, priceArray: string[]): string[]{
@@ -242,60 +126,31 @@ export class InvoiceModalComponent {
           
   }
 
-
-  calculateTotalPrice(priceArray: string[]): string{
-    let res: number = 0;
-    priceArray.forEach( element => {
-      res += parseInt(element)
-    })
-    return res.toString();
-  }
-
-
-  deleteEndBlankSpaces(array: String[]){
-    var i = array.length - 1
-    while(array[i] === ""){
-      array.pop()
-      i--;
-    } 
-  }
-
-  setTitleFormat(doc: jspdf){
-    doc.setFont("arial", "bold")
-    doc.setFontSize(15)
-  }
-
-  setBodyFormat(doc: jspdf){
-    doc.setFont("arial", "normal")
-    doc.setFontSize(9)
-  }
-
-  closeClick(){
-    this.dialogRef.close();
-  }
-
-  addNewRow(){
-    this.rows.push({
-      concept: "",
-      price: 0
-    });
-  }
-
-  async createInvoice(){
-    const doc = new jspdf();
+  obtainData(doc: jspdf): [string, string[], number]{
     let conceptText: string = "";
     let priceArray: string[] = [];
     let totalPrice: number = 0;
     for (var i = 0; i < this.rows.length; i++) {
-      conceptText += this.rows[i].concept+"\n\n";
+      conceptText += this.rows[i].concept;
       if(i < this.rows.length-1){
-        conceptText += "--addedLineByRow--"+"\n"
+        conceptText += "--addedLineByRow--"
       }
       priceArray.push("-"+this.rows[i].price.toString()+"€");
       totalPrice += this.rows[i].price;
+      console.log(typeof totalPrice)
+      console.log(typeof this.rows[i].price)
     }
+    return [conceptText, priceArray, totalPrice]
+   
+  }
+  async createInvoice(){
+    const doc = new jspdf();
+   
+    let conceptText = this.obtainData(doc)[0];
+    let priceArray = this.obtainData(doc)[1];
+    let totalPrice = this.obtainData(doc)[2];
+
     let splitText: string[] = this.addPriceToText(doc, conceptText, priceArray)
-    
     doc.text(splitText,15,15);
 
     let ivaValue: number = 10;
@@ -313,7 +168,7 @@ export class InvoiceModalComponent {
       concept: conceptText,
       prices: pricesArray.toString(),
       totalPrice: totalPrice,
-      invoiceState: "Borrador",
+      invoiceState: 'Borrador',
       iva: ivaValue,
       work: this.work
     }
@@ -322,6 +177,29 @@ export class InvoiceModalComponent {
     this._router.navigateByUrl("/facturas").then(() => {
       window.location.reload();
     });
+  }
+
+  async editInvoice(){
+    const doc = new jspdf();
+    let editedInvoice = this.invoice;
+    let conceptText = this.obtainData(doc)[0];
+    let totalPrice = this.obtainData(doc)[2];
+
+    console.log(conceptText)
+
+    let pricesArray: number[] = [];
+    this.rows.forEach(value =>{
+      pricesArray.push(value.price)
+    })
+    console.log(typeof pricesArray)
+    editedInvoice.concept = conceptText;
+    editedInvoice.prices = pricesArray.toString();
+    editedInvoice.totalPrice = totalPrice;
+    editedInvoice.invoiceState = this.context.getState();
+
+    await this._invoiceService.update(editedInvoice).subscribe();
+
+    this.dialogRef.close();
   }
 
   calculateDate(): string{
@@ -351,9 +229,16 @@ export class InvoiceModalComponent {
     });
   }
   compareByID(itemOne: any, itemTwo: any){
-    console.log(itemOne)
-    console.log(itemTwo)
-    console.log(this.work)
     return itemOne && itemTwo && itemOne.id == itemTwo.id;
-    }
+  }
+
+  exportPDF(){
+    let iva = 10;
+    if(this.iva.value) iva = this.iva.value
+    this.context.printPDF(this.rows, iva, this.invoice, this.work);
+  }
+
+  changeState(){
+    this.context.transition()
+  }
 }

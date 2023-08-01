@@ -4,6 +4,7 @@ import jspdf from 'jspdf';
 import { InvoiceModalComponent } from '../invoice-modal/invoice-modal.component';
 import { MatDialog } from '@angular/material/dialog';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-invoices-table',
@@ -12,6 +13,14 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class InvoicesTableComponent {
   @Input() invoices: Invoice[] = [];
+  
+  settingsIcon=faPenToSquare;
+
+  settingsPressed: boolean = false;
+
+  public filter: string = '';
+
+  public filterType: string = '0';
 
   
   constructor(
@@ -25,9 +34,9 @@ export class InvoicesTableComponent {
   
   editInvoiceClick(invoice: Invoice){
     const doc = new jspdf();
-    let priceArray = invoice.prices.split(",");
+    let priceArray: number[] = invoice.prices.split(",").map(Number);
     let rows: [{}] = [{}];
-    let textArray = invoice.concept.split("--addedLineByRow--\n")
+    let textArray = invoice.concept.split("--addedLineByRow--")
     
     for(let i=0; i < textArray.length; i++){
       rows.push({
@@ -44,9 +53,14 @@ export class InvoicesTableComponent {
       width: "1200px",
       data: {
         data: invoice,
-        rows: rows
+        rows: rows,
+        settingsPressed: this.settingsPressed
       }
     });
+  }
+
+  settingsClick(): void {
+    this.settingsPressed = !this.settingsPressed
   }
 
 

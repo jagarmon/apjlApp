@@ -1,3 +1,22 @@
+<form class="filter">
+    <div class="mb-3 row">
+        <label for="table-filtering-search" class="col-xs-3 col-sm-auto col-form-label"><h6>Buscar:</h6></label>
+        <div class="col-xs-3 col-sm-auto">
+            <input name="filterName" id="table-filtering-search" class="form-control" type="text" [(ngModel)]="filter" />
+        </div>               
+
+            <div class="col-xs-3 col-sm-auto">
+                <mat-select name="filterTypeName" class="form-control" id="table-filtering-type" [(ngModel)]="filterType" #singleSelect>   
+                    <mat-option value="0">Trabajo</mat-option>   
+                    <mat-option value="1">Cliente</mat-option>  
+                    <mat-option value="2">Ciudad</mat-option> 
+                    <mat-option value="3">Pagado</mat-option>                        
+                </mat-select>
+            </div>
+    </div>
+    
+</form>
+
 <div class="container-div">
        <table class="table table-hover">
         <thead>
@@ -7,7 +26,7 @@
             <th scope="col">Trabajo</th>
             <th scope="col">Cliente</th>
             <th scope="col">Precio</th>
-            <th scope="col">Pagado</th>
+            <!--<th scope="col">Pagado</th>-->
         </tr>
         </thead>
         <tbody>            
@@ -17,10 +36,22 @@
                 <td (click)="editInvoiceClick(invoice)">{{invoice.work.name}}</td>
                 <td (click)="editInvoiceClick(invoice)">{{invoice.work.customer.firstName}} {{invoice.work.customer.lastName}}</td>
                 <td (click)="editInvoiceClick(invoice)">{{invoice.totalPrice}}</td>
-                <td (click)="editInvoiceClick(invoice)"><input type="checkbox" name="checkBoxPaid" [checked]="invoice.work.paid"/></td>                        
+                <!--<td (click)="editInvoiceClick(invoice)"><input type="checkbox" name="checkBoxPaid" [checked]="invoice.work.paid"/></td> -->                       
             </tr>
         </tbody>
     </table>
+
+    <app-floating-button 
+      buttonBorderColor="black" 
+      buttonBackGroundColor="yellow" 
+      buttonRight="10px" 
+      buttonBottom="10px" 
+      buttonHeight="75px"
+      buttonWidth="75px"
+      buttonIconColor="black"
+      [buttonIcon]="settingsIcon"
+      (click)="settingsClick()">
+    </app-floating-button>
 
    
 </div>

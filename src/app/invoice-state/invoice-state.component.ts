@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-invoice-state',
@@ -6,5 +6,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./invoice-state.component.css']
 })
 export class InvoiceStateComponent {
+  @Input() disabled: boolean = false;
 
+  @Input() selectedButton: string = "Borrador"
+
+  @Output() clickedButton: EventEmitter<string> = new EventEmitter();
+
+  buttonClick(){
+    this.clickedButton.emit()
+  }
 }

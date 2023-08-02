@@ -13,5 +13,5 @@ export abstract class State {
 
     public abstract transition(): void;
 
-    public abstract printPDF(rows: Object, iva: number, invoice: Invoice, work: Work): void;
+    public abstract printPDF(rows: Object, iva: number, invoice: Invoice, work: Work): boolean;
 }

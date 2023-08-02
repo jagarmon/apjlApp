@@ -21,7 +21,6 @@
     <table class="table table-hover">
         <thead>
         <tr>
-            <th scope="col">Número factura</th>
             <th scope="col">Trabajo</th>
             <th scope="col">Ciudad</th>
             <th scope="col">Cliente</th>
@@ -30,7 +29,6 @@
         </thead>
         <tbody>            
             <tr *ngFor="let work of works | filter : filter : filterType">
-                <th (click)="editWorkClick(work)" scope="row">{{work.id}}</th>
                 <td (click)="editWorkClick(work)">{{work.name}}</td>
                 <td (click)="editWorkClick(work)">{{work.city}}</td>
                 <td (click)="editWorkClick(work)">{{work.customer.firstName}} {{work.customer.lastName}}</td>

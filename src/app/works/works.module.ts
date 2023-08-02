@@ -10,20 +10,24 @@ import { WorkModalComponent } from '../work-modal/work-modal.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { InvoiceModalComponent } from '../invoice-modal/invoice-modal.component';
 import {AutosizeModule} from 'ngx-autosize';
+import { InvoiceStateComponent } from '../invoice-state/invoice-state.component';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 @NgModule({
   declarations: [
     WorksComponent,
     WorksTableComponent,
     WorkModalComponent,
     FilterPipe,
-    InvoiceModalComponent
+    InvoiceModalComponent,
+    InvoiceStateComponent
   ],
   imports: [
     CommonModule,
     WorksRoutingModule,
     SharedModule,
     MatRadioModule,
-    AutosizeModule
+    AutosizeModule,
+    MatButtonToggleModule
   ]
 })
 export class WorksModule { }

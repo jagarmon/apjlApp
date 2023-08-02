@@ -84,3 +84,7 @@ textarea{
 .buttonContainer{
     display:flex;
 }
+
+.addRowButton{
+    margin-left:60px;
+}

@@ -7,10 +7,10 @@
 
             <div class="col-xs-3 col-sm-auto">
                 <mat-select name="filterTypeName" class="form-control" id="table-filtering-type" [(ngModel)]="filterType" #singleSelect>   
-                    <mat-option value="0">Trabajo</mat-option>   
-                    <mat-option value="1">Cliente</mat-option>  
-                    <mat-option value="2">Ciudad</mat-option> 
-                    <mat-option value="3">Pagado</mat-option>                        
+                    <mat-option value="0">Número factura</mat-option>   
+                    <mat-option value="1">Estado</mat-option>  
+                    <mat-option value="2">Nombre del trabajo</mat-option> 
+                    <mat-option value="3">Cliente</mat-option>                        
                 </mat-select>
             </div>
     </div>
@@ -26,17 +26,15 @@
             <th scope="col">Trabajo</th>
             <th scope="col">Cliente</th>
             <th scope="col">Precio</th>
-            <!--<th scope="col">Pagado</th>-->
         </tr>
         </thead>
         <tbody>            
-            <tr *ngFor="let invoice of invoices">
+            <tr *ngFor="let invoice of invoices | invoicesTable : filter : filterType">
                 <td (click)="editInvoiceClick(invoice)" scope="row">{{invoice.invoiceID}}</td>
                 <td (click)="editInvoiceClick(invoice)">{{invoice.invoiceState}}</td>
                 <td (click)="editInvoiceClick(invoice)">{{invoice.work.name}}</td>
                 <td (click)="editInvoiceClick(invoice)">{{invoice.work.customer.firstName}} {{invoice.work.customer.lastName}}</td>
-                <td (click)="editInvoiceClick(invoice)">{{invoice.totalPrice}}</td>
-                <!--<td (click)="editInvoiceClick(invoice)"><input type="checkbox" name="checkBoxPaid" [checked]="invoice.work.paid"/></td> -->                       
+                <td (click)="editInvoiceClick(invoice)">{{invoice.totalPrice}}</td>                     
             </tr>
         </tbody>
     </table>

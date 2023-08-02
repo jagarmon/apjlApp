@@ -29,7 +29,7 @@ export class Context {
         this.state.transition();
     }
 
-    public printPDF(rows: Object, iva: number, invoice: Invoice, work: Work): void {
-        this.state.printPDF(rows, iva, invoice, work);
+    public printPDF(rows: Object, iva: number, invoice: Invoice, work: Work): boolean {
+        return this.state.printPDF(rows, iva, invoice, work);
     }
 }

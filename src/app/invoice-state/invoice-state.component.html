@@ -1,1 +1,6 @@
-<p>Aquí irá una barra de estado</p>
+<p >
+    <mat-button-toggle-group [value]="selectedButton" [disabled]="disabled" name="fontStyle" aria-label="Font Style">
+      <mat-button-toggle (click)="buttonClick()" value="Borrador">Borrador</mat-button-toggle>
+      <mat-button-toggle (click)="buttonClick()" value="Publicado">Publicado</mat-button-toggle>
+    </mat-button-toggle-group>
+</p>

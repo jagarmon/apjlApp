@@ -24,7 +24,7 @@ export class Published extends State {
         this.context.transitionTo(new Draft());
     }
 
-    public printPDF(rows: any[], iva: number, invoice: Invoice, work: Work): void {
+    public printPDF(rows: any[], iva: number, invoice: Invoice, work: Work): boolean {
         
         const doc = new jspdf();
 
@@ -70,6 +70,8 @@ export class Published extends State {
           
           doc.output('dataurlnewwindow');
           doc.save("factura_"+work.customer.firstName+"_"+work.customer.lastName)
+          
+          return true
     }
 
     setHeader(doc: jspdf, invoice: Invoice, work: Work): number{
@@ -210,5 +212,4 @@ export class Published extends State {
         doc.setFont("arial", "normal")
         doc.setFontSize(9)
       }
-        
 }

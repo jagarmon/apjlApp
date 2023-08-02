@@ -12,6 +12,8 @@ import { CustomerService } from '../services/customer.service';
 import { Context } from '../invoices/state/context';
 import { Draft } from '../invoices/state/draft';
 import { Published } from '../invoices/state/published';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ConfirmationModalComponent } from '../shared/confirmation-modal/confirmation-modal.component';
 
 @Component({
   selector: 'app-invoice-modal',
@@ -20,6 +22,7 @@ import { Published } from '../invoices/state/published';
 })
 //Crear nueva pagina, IVA mockeado, Introducir los datos del usuario que faltan, y los que estan meterlos en el formulario
 export class InvoiceModalComponent {
+
   
   checkIcon=faCheck;
   cancelIcon=faXmark;
@@ -49,7 +52,6 @@ export class InvoiceModalComponent {
   iva = new FormControl(10);
   ivaList: number[] = [21, 10, 5, 4, 0];
 
-
   ngOnInit(){
     this.customerService.findAll().subscribe(
       (data: Customer[]) => {
@@ -66,7 +68,8 @@ export class InvoiceModalComponent {
     private _router: Router,
     private _invoiceService: InvoiceService,
     private customerService: CustomerService,
-    public dialogRef: MatDialogRef<InvoiceModalComponent>
+    public dialogRef: MatDialogRef<InvoiceModalComponent>,
+    private _modalService: NgbModal
     ){
       if(object.data.invoiceID){
         this.invoice = object.data
@@ -77,12 +80,29 @@ export class InvoiceModalComponent {
         else if (object.data.invoiceState === 'Publicado')
           this.context = new Context(new Published());
       }
-      else this.work = object.data;
+      else{ 
+        this.work = object.data;
+        this.settingsPressed = true;
+      }
       this.rows = object.rows
   }
 
   closeClick(){
     this.dialogRef.close();
+  }
+
+  stateButtonClicked(){
+    let message = "Publicado"
+    if(this.invoice.invoiceState === "Publicado") message  = "Borrador"
+    let modal = this.showConfirmationModal("¿Desea cambiar el estado de la factura?","La factura pasará a estado "+message)
+    modal.result.then((result: any) => {
+      if ( result === 'success' ) {
+        this.changeState();
+        this.invoice.invoiceState= this.context.getState()
+      }else{
+      }
+    });   
+    
   }
 
   addNewRow(){
@@ -235,10 +255,22 @@ export class InvoiceModalComponent {
   exportPDF(){
     let iva = 10;
     if(this.iva.value) iva = this.iva.value
-    this.context.printPDF(this.rows, iva, this.invoice, this.work);
+    let res =this.context.printPDF(this.rows, iva, this.invoice, this.work);
+
+    if (!res){
+      this.showConfirmationModal("Error al imprimir la factura", "No se puede imprimir una factura en Borrador, pásela a Publicado y vuelva a intentarlo")
+    }
   }
 
   changeState(){
+    console.log("Changing state")
     this.context.transition()
   }
+
+  showConfirmationModal(title: string, description: string): any{
+    const modal: any = this._modalService.open(ConfirmationModalComponent);
+    modal.componentInstance.title = title;
+    modal.componentInstance.description = description;
+    return modal;
+}
 }

@@ -16,7 +16,9 @@
               buttonPosition="absolute"
               (click)="closeClick()"
         />
-
+        <div [hidden]="!invoice.invoiceID">
+          <app-invoice-state  (clickedButton)="stateButtonClicked()" [selectedButton]="invoice.invoiceState" [disabled]="!settingsPressed"></app-invoice-state>
+        </div>
         <div class="form-group" [hidden]="!invoice.invoiceID">
           <label for="textInvoiceID">ID factura</label>        
           <input disabled style="width: 100%" name="textInvoiceID" [value]="invoice.invoiceID" type="text">
@@ -34,7 +36,7 @@
         
         <div class="form-group" [hidden]="!invoice.invoiceID">
             <label for="select-iva" >Iva:</label>
-                <mat-select [formControl]="iva" name="select-iva" class="form-control" id="select-iva" #singleSelect>   
+                <mat-select [disabled]="!settingsPressed" [formControl]="iva" name="select-iva" class="form-control" id="select-iva" #singleSelect>   
                     <mat-option *ngFor="let iva of ivaList" [value]="iva">{{iva}}</mat-option>                            
                 </mat-select>
         </div>
@@ -49,21 +51,22 @@
             <tbody>
               <tr *ngFor="let row of rows; let i = index">
                 <td width="650px">
-                    <textarea  autosize style="width:100%;" name="invoiceTextArea{{i}}" [(ngModel)]="row.concept"></textarea>
+                    <textarea [disabled]="invoice.invoiceState !== 'Borrador'" autosize style="width:100%;" name="invoiceTextArea{{i}}" [(ngModel)]="row.concept"></textarea>
                 </td>
                 <td width="50px">
-                    <input style="width: 100%" name="price{{i}}" type="number" [(ngModel)]="row.price">
+                    <input [disabled]="invoice.invoiceState !== 'Borrador'" style="width: 100%" name="price{{i}}" type="number" [(ngModel)]="row.price">
                 </td>
               </tr>
              
             </tbody>
           </table>     
-          <button (click)="addNewRow()">Añadir concepto</button>
+          <button class="addRowButton" [hidden]="invoice.invoiceState !== 'Borrador'" (click)="addNewRow()">Añadir concepto</button>
           <div class="buttonDiv" [hidden]="invoice.invoiceID">
             <button class="confirmButton" (click)="createInvoice()"><fa-icon [icon]="checkIcon"></fa-icon></button>
           </div>
           <div class="buttonContainer">
-            <div class="buttonDiv" [hidden]="!invoice.invoiceID">
+            
+            <div [hidden]="!invoice.invoiceID">
               <button class="invoiceButton" (click)="exportPDF()"><fa-icon [icon]="invoiceIcon"></fa-icon></button>
             </div>
 
@@ -71,9 +74,7 @@
               <button class="confirmButton" (click)="editInvoice()"><fa-icon [icon]="checkIcon"></fa-icon></button>
             </div>
 
-            <div [hidden]="!invoice.invoiceID">
-              <button class="confirmButton" (click)="changeState()"><fa-icon [icon]="invoiceIcon"></fa-icon></button>
-            </div>
+            
           </div>         
 
         </body> 

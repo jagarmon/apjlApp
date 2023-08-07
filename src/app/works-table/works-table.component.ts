@@ -98,11 +98,9 @@ export class WorksTableComponent {
         });   
   }
 
-  deleteWork(work: Work){
-    setTimeout(()=>{
-      this._workService.delete(work.id).subscribe()
-      window.location.reload()
-    },2000);
+  async deleteWork(work: Work){
+    await this._workService.delete(work.id).subscribe()
+    window.location.reload()
   }
 
   generateInvoiceClick(work: Work){

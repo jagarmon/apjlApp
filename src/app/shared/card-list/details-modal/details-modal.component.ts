@@ -59,7 +59,7 @@ export class DetailsModalComponent {
 
   this.dialogRef.close();
   
-  setTimeout(()=>{window.location.reload()},2000);
+  window.location.reload();
 
  }
 
@@ -68,18 +68,18 @@ export class DetailsModalComponent {
  }
 
 
- updateElement(): void{
+ async updateElement(): Promise<void>{
 
   if(this.card.type == "updateCustomer"){
 
     let customer = this.createCustomerObject();
-    setTimeout(()=>{this.customerService.update(customer).subscribe()},2000);
+    await this.customerService.update(customer).subscribe();
 
   } 
   else if(this.card.type == "createCustomer"){
 
     let customer = this.createCustomerObject();
-    setTimeout(()=>{this.customerService.save(customer).subscribe()},2000);
+    await this.customerService.save(customer).subscribe();
   }
   else if(this.card.type == "provider") console.log("DO SOMETHING")
  }

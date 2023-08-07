@@ -78,7 +78,6 @@ export class CardListComponent {
         modal.result.then((result: any) => {
           if ( result === 'success' ) {
             this.deleteCustomer(data); 
-          }else{
           }
         });   
         }

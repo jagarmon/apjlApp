@@ -14,6 +14,7 @@ import { Draft } from '../invoices/state/draft';
 import { Published } from '../invoices/state/published';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmationModalComponent } from '../shared/confirmation-modal/confirmation-modal.component';
+import { CopyClipboardModalComponent } from '../works-table/copy-clipboard-modal/copy-clipboard-modal.component';
 
 @Component({
   selector: 'app-invoice-modal',
@@ -99,7 +100,6 @@ export class InvoiceModalComponent {
       if ( result === 'success' ) {
         this.changeState();
         this.invoice.invoiceState= this.context.getState()
-      }else{
       }
     });   
     
@@ -192,11 +192,25 @@ export class InvoiceModalComponent {
       iva: ivaValue,
       work: this.work
     }
-    await this._invoiceService.save(invoice).subscribe();
-    this.dialogRef.close();
-    this._router.navigateByUrl("/facturas").then(() => {
-      window.location.reload();
-    });
+    let invoiceID: string = "";
+    await this._invoiceService.save(invoice).subscribe(
+      (response: any) => {
+        this.callModal(response)
+      }
+    );    
+  }
+
+  callModal(invoiceID: string){
+    let modal = this.showCopyToClipboardModal(invoiceID);
+
+    modal.result.then(async (result: any) => {
+      if ( result === 'success' ) {
+        this.dialogRef.close();
+        this._router.navigateByUrl("/facturas").then(() => {
+          window.location.reload();
+        });
+      }
+    });   
   }
 
   async editInvoice(){
@@ -273,4 +287,10 @@ export class InvoiceModalComponent {
     modal.componentInstance.description = description;
     return modal;
 }
+
+  showCopyToClipboardModal(idInvoice: string): any{
+    const modal: any = this._modalService.open(CopyClipboardModalComponent);
+    modal.componentInstance.invoiceID = idInvoice;
+    return modal;
+  }
 }

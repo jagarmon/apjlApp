@@ -24,7 +24,7 @@
             <th scope="col">Trabajo</th>
             <th scope="col">Ciudad</th>
             <th scope="col">Cliente</th>
-            <th scope="col">Pagado</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>            
@@ -32,23 +32,22 @@
                 <td (click)="editWorkClick(work)">{{work.name}}</td>
                 <td (click)="editWorkClick(work)">{{work.city}}</td>
                 <td (click)="editWorkClick(work)">{{work.customer.firstName}} {{work.customer.lastName}}</td>
-                <td (click)="editWorkClick(work)"><input type="checkbox" name="checkBoxPaid" [checked]="work.paid"/></td>
                 <td>
                     <app-floating-button 
                     buttonBorderColor="red" 
                     buttonBackGroundColor="red" 
-                    buttonRight="15px"
+                    buttonRight="250px"
                     [buttonIcon]="cancelIcon"
                     *ngIf="settingsPressed"
                     (click)="deleteWorkClick(work)"
                     buttonPosition="absolute">
                     </app-floating-button> 
-                </td>
-                <td>
+
                     <app-floating-button 
+                        *ngIf="!settingsPressed"
                         buttonBorderColor="purple" 
                         buttonBackGroundColor="purple" 
-                        buttonRight="15px"
+                        buttonRight="250px"
                         buttonPosition="absolute"
                         [buttonIcon]="invoiceIcon"
                         (click)="generateInvoiceClick(work)">

@@ -1,0 +1,24 @@
+<div class="modal-header">
+    <h5 class="modal-title">Factura  con id {{invoiceID}} creada correctamente</h5>
+  </div>
+    <div class="modal-body">
+        <app-floating-button 
+        class="prueba"
+        buttonBorderColor="black" 
+        buttonBackGroundColor="green" 
+        buttonRight="10px" 
+        buttonWidth="35px"
+        buttonHeight="35px"
+        [buttonIcon]="copyIcon"
+        buttonPosition="relative"
+        (click)="copyToClipboardClick()"
+    />
+    
+    <p class="prueba" [hidden]="clickedButton">Copiar número de factura al portapapeles</p>
+    <p class="prueba" [hidden]="!clickedButton">Número de factura copiado al portapapeles</p>
+    <br>
+    
+</div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="continueClick()">Aceptar</button>
+  </div>

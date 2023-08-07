@@ -1,23 +1,22 @@
-<form class="filter">
-    <div class="mb-3 row">
-        <label for="table-filtering-search" class="col-xs-3 col-sm-auto col-form-label"><h6>Buscar:</h6></label>
-        <div class="col-xs-3 col-sm-auto">
-            <input name="filterName" id="table-filtering-search" class="form-control" type="text" [(ngModel)]="filter" />
-        </div>               
-
-            <div class="col-xs-3 col-sm-auto">
-                <mat-select name="filterTypeName" class="form-control" id="table-filtering-type" [(ngModel)]="filterType" #singleSelect>   
-                    <mat-option value="0">Número factura</mat-option>   
-                    <mat-option value="1">Estado</mat-option>  
-                    <mat-option value="2">Nombre del trabajo</mat-option> 
-                    <mat-option value="3">Cliente</mat-option>                        
-                </mat-select>
-            </div>
-    </div>
-    
-</form>
-
 <div class="container-div">
+    <form class="filter">
+        <div class="mb-3 row">
+            <label for="table-filtering-search" class="col-xs-3 col-sm-auto col-form-label"><h6>Buscar:</h6></label>
+            <div class="col-xs-3 col-sm-auto">
+                <input name="filterName" id="table-filtering-search" class="form-control" type="text" [(ngModel)]="filter" />
+            </div>               
+
+                <div class="col-xs-3 col-sm-auto">
+                    <mat-select name="filterTypeName" class="form-control" id="table-filtering-type" [(ngModel)]="filterType" #singleSelect>   
+                        <mat-option value="0">Número factura</mat-option>   
+                        <mat-option value="1">Estado</mat-option>  
+                        <mat-option value="2">Nombre del trabajo</mat-option> 
+                        <mat-option value="3">Cliente</mat-option>                        
+                    </mat-select>
+                </div>
+        </div>
+        
+    </form>
        <table class="table table-hover">
         <thead>
         <tr>
@@ -26,6 +25,7 @@
             <th scope="col">Trabajo</th>
             <th scope="col">Cliente</th>
             <th scope="col">Precio</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>            
@@ -34,7 +34,19 @@
                 <td (click)="editInvoiceClick(invoice)">{{invoice.invoiceState}}</td>
                 <td (click)="editInvoiceClick(invoice)">{{invoice.work.name}}</td>
                 <td (click)="editInvoiceClick(invoice)">{{invoice.work.customer.firstName}} {{invoice.work.customer.lastName}}</td>
-                <td (click)="editInvoiceClick(invoice)">{{invoice.totalPrice}}</td>                     
+                <td (click)="editInvoiceClick(invoice)">{{invoice.totalPrice}}</td>        
+                <td>
+                    <app-floating-button 
+                    buttonBorderColor="red" 
+                    buttonBackGroundColor="red" 
+                    buttonRight="250px"
+                    [buttonIcon]="cancelIcon"
+                    *ngIf="settingsPressed && invoice.invoiceState === 'Borrador'"
+                    (click)="deleteInvoiceClick(invoice)"
+                    buttonPosition="absolute">
+                    </app-floating-button> 
+                </td>
+                <td></td>             
             </tr>
         </tbody>
     </table>

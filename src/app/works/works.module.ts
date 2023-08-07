@@ -12,6 +12,7 @@ import { InvoiceModalComponent } from '../invoice-modal/invoice-modal.component'
 import {AutosizeModule} from 'ngx-autosize';
 import { InvoiceStateComponent } from '../invoice-state/invoice-state.component';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { CopyClipboardModalComponent } from '../works-table/copy-clipboard-modal/copy-clipboard-modal.component';
 @NgModule({
   declarations: [
     WorksComponent,
@@ -19,7 +20,8 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
     WorkModalComponent,
     FilterPipe,
     InvoiceModalComponent,
-    InvoiceStateComponent
+    InvoiceStateComponent,
+    CopyClipboardModalComponent
   ],
   imports: [
     CommonModule,

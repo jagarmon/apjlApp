@@ -4,7 +4,9 @@ import jspdf from 'jspdf';
 import { InvoiceModalComponent } from '../invoice-modal/invoice-modal.component';
 import { MatDialog } from '@angular/material/dialog';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
+import { faPenToSquare, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { DeleteConfirmationModalComponent } from '../shared/delete-confirmation-modal/delete-confirmation-modal.component';
+import { InvoiceService } from '../services/invoice.service';
 
 @Component({
   selector: 'app-invoices-table',
@@ -17,6 +19,8 @@ export class InvoicesTableComponent {
   settingsIcon=faPenToSquare;
 
   settingsPressed: boolean = false;
+  
+  cancelIcon=faXmark;
 
   public filter: string = '';
 
@@ -25,8 +29,8 @@ export class InvoicesTableComponent {
   
   constructor(
     private _matDialog: MatDialog, 
-    private _modalService: NgbModal){
-      
+    private _modalService: NgbModal,
+    private _invoiceService: InvoiceService){
     }
   ngOnInit(){
 
@@ -61,6 +65,23 @@ export class InvoicesTableComponent {
 
   settingsClick(): void {
     this.settingsPressed = !this.settingsPressed
+  }
+
+  deleteInvoiceClick(invoice: Invoice){
+    let modal = this.showDeleteConfirmationModal(invoice);
+
+      modal.result.then(async (result: any) => {
+        if ( result === 'success' ) {
+          await this._invoiceService.delete(invoice.id).subscribe();
+          window.location.reload() 
+        }
+      });   
+  }
+
+  showDeleteConfirmationModal(invoice: Invoice): any{
+    const modal: any = this._modalService.open(DeleteConfirmationModalComponent);
+    modal.componentInstance.deletedElement = "la factura número " + invoice.invoiceID;
+    return modal;
   }
 
 

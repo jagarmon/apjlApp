@@ -36,7 +36,7 @@
         
         <div class="form-group" [hidden]="!invoice.invoiceID">
             <label for="select-iva" >Iva:</label>
-                <mat-select [disabled]="!settingsPressed" [formControl]="iva" name="select-iva" class="form-control" id="select-iva" #singleSelect>   
+                <mat-select [disabled]="invoice.invoiceState !== 'Borrador'" [formControl]="iva" name="select-iva" class="form-control" id="select-iva" #singleSelect>   
                     <mat-option *ngFor="let iva of ivaList" [value]="iva">{{iva}}</mat-option>                            
                 </mat-select>
         </div>
@@ -51,10 +51,10 @@
             <tbody>
               <tr *ngFor="let row of rows; let i = index">
                 <td width="650px">
-                    <textarea [disabled]="invoice.invoiceState !== 'Borrador'" autosize style="width:100%;" name="invoiceTextArea{{i}}" [(ngModel)]="row.concept"></textarea>
+                    <textarea [disabled]="invoice.invoiceState && invoice.invoiceState !== 'Borrador'" autosize style="width:100%;" name="invoiceTextArea{{i}}" [(ngModel)]="row.concept"></textarea>
                 </td>
                 <td width="50px">
-                    <input [disabled]="invoice.invoiceState !== 'Borrador'" style="width: 100%" name="price{{i}}" type="number" [(ngModel)]="row.price">
+                    <input [disabled]="invoice.invoiceState && invoice.invoiceState !== 'Borrador'" style="width: 100%" name="price{{i}}" type="number" [(ngModel)]="row.price">
                 </td>
               </tr>
              

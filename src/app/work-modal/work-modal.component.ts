@@ -6,6 +6,7 @@ import { CustomerService } from '../services/customer.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { faCheck, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-work-modal',
@@ -25,6 +26,7 @@ export class WorkModalComponent {
     private _router: Router,
     private workService: WorkService,
     private customerService: CustomerService,
+    private _modalService: NgbModal,
     public dialogRef: MatDialogRef<WorkModalComponent>){
       this.work = data.work;
       this.type = data.type;
@@ -47,20 +49,20 @@ export class WorkModalComponent {
     })    
   }
 
-  saveClick(){
-      if(this.type === 'create')      
-      setTimeout(()=>{
-        this.workService.save(this.createWorkObject()).subscribe();
+  async saveClick(){
+    if(this.type === 'create')      
+      
+      await this.workService.save(this.createWorkObject()).subscribe();
         
-      },2000);   
+      
     else if(this.type === 'update')
-      setTimeout(()=>{
-        this.workService.update(this.createWorkObject()).subscribe();
+     
+      await this.workService.update(this.createWorkObject()).subscribe();
         
-      },2000);
+     
       
     this.dialogRef.close();
-    if(this.type==='create') setTimeout(()=>{window.location.reload();},2000);
+    if(this.type==='create') window.location.reload();
     
   }
 
@@ -99,5 +101,7 @@ export class WorkModalComponent {
       return fullName.includes(filter);
     });
   }
+
+  
 
 }
